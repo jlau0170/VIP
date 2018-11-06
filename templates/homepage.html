@@ -47,19 +47,29 @@
   {% else %}
     <body onload="handle_data();">
       <h1>Hello {{ user }}</h1>
+      <h4>Listen and watch the video and make annotations to both the video and image. To make video annotations, type your annotation into the text box and input the timestamp of the video. To make image annotations, click and drag on the image to create a box and annotate directly onto the image. In order for your annotations to be saved, you must hit "submit". </h4>
       <h4>Bias: {{ bias }}</h4>
       <h4>Points: {{ points }}</h4>
       {% if user == 'user1' %}
       <video width="600" height="440" autoplay>
           <source src="{{ url_for('static', filename='videos/nature.mp4') }}" type="video/mp4">
       </video>
+      <br>
+      <textarea id="vid_anno" rows="4" cols="50"> Input your video annotation here.
+      </textarea>
+      Timestamp:
+      <textarea id="timestamp" rows="1" cols="5">
+      </textarea>
+      <input name="store_annos" type="button" value="Submit Video Annotations" onclick="store_vid_annotations(document.getElementById('timestamp').value, document.getElementById('vid_anno').value);"/><br><br>
+
+      <br>
         <img src="{{ url_for('static', filename='images/flood.jpg') }}" class=annotatable width=600/>
       {% elif user == 'user2' %}
         <img src="{{ url_for('static', filename='images/elephant.jpg') }}" class=annotatable width=600/>
       {% elif user == 'user3' %}
         <img src="{{ url_for('static', filename='images/mask.jpg') }}" class=annotatable width=600/>
       {% endif %}
-      <input name="store_annos" type="button" value="Submit" onclick="store_annotations();"/><br><br>
+      <input name="store_annos" type="button" value="Submit Image Annotations" onclick="store_annotations();"/><br><br>
 
       <input name="show_all_annos" type="button" value="Show All Annotations" onclick="populate({{ [populated_annos , points] }});"/><br><br>
 

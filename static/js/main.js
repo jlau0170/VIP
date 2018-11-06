@@ -14,6 +14,19 @@ function store_annotations() {
   }
 }
 
+function store_vid_annotations(timestamp, vid_anno) {
+  // var time = document.getElementById("timestamp")
+  // var vid_anno = document.getElementById("vid_anno")
+  console.log(typeof(timestamp))
+  console.log(vid_anno)
+  if (!timestamp || /^\s*$/.test(timestamp)) {
+    alert("Please input a time.")
+  } else {
+    // input into database
+    alert("Your annotation has been recorded.")
+  }
+}
+
 var mA = {
   src : 'http://127.0.0.1:5000/static/images/dog-park.jpg',
   text : 'My annotation',
@@ -34,7 +47,7 @@ function populate(arr) {
   // if (typeof populated_annos1 == 'undefined'):
   //   alert("There are no annotations to show.")
   //   return
-  if (points1 >= 0) {
+  if (points1 >= 10) {
     var annotationBox = document.getElementById("annotationBox")
     annotationBox.style.display = "block"
     console.log(annotationBox.style.display)
