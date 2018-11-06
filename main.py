@@ -31,16 +31,31 @@ def homepage(user=None):
     csm = CogSciModule()
     input_annotations = []
     populated_annos = []
+    other_annos = []
     users = firebase.database().child("users").get()
+    # print(list(users.val()[user].keys()))
+    sample_anno = list(users.val()[user].keys())[0]
+    # print(sample_anno)
+    source = users.val()[user][sample_anno]['src']
+    # print(source)
     for u in users.val():
-        print(u)
+        # print(type(u))
+        # print(user)
         if str(u) == user:
+            print("debug")
             for anno in users.val()[u]:
                 input_annotations.append(users.val()[u][anno]['text'])
+
         else:
             for anno in users.val()[u]:
-                print(anno)
-                populated_annos.append(users.val()[u][anno])
+                # print(anno)
+                print(users.val()[u][anno]['src'])
+                if (source == users.val()[u][anno]['src']):
+                    other_annos.append(users.val()[u][anno]['text'])
+                populated_annos.append(users.val()[u][anno]['text'])
+    print(populated_annos)
+    print(input_annotations)
+    print(other_annos)
     bias = csm.updateCurrentAnnotations(input_annotations)
     points = len(input_annotations)
     return render_template("homepage.html", user=user, bias=bias, points=points, populated_annos=populated_annos)

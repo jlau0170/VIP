@@ -23,15 +23,32 @@ var mA = {
   }]
 }
 
-function populate(populated_annos) {
-  console.log(populated_annos)
-  for (var i = 0; i < populated_annos.length; i++) {
+function populate(arr) {
+  // arr = [populated_annos, points]
+  // console.log(points1)
+  populated_annos1 = arr[0]
+  points1 = arr[1]
+  console.log(arr[0])
+  console.log(arr[1])
+
+  // if (typeof populated_annos1 == 'undefined'):
+  //   alert("There are no annotations to show.")
+  //   return
+  if (points1 >= 0) {
+    var annotationBox = document.getElementById("annotationBox")
+    annotationBox.style.display = "block"
+    console.log(annotationBox.style.display)
+    annotationBox.value = populated_annos1
+  } else {
+    alert("You don't have enough points.")
+  }
+  for (var i = 0; i < populated_annos1.length; i++) {
     var myAnno = {
-      src : populated_annos[i].src,
-      text : populated_annos[i].text,
+      src : populated_annos1[i].src,
+      text : populated_annos1[i].text,
       shapes : [{
-        type : populated_annos[i].shapes[0].type,
-        geometry : populated_annos[i].shapes[0].geometry
+        type : populated_annos1[i].shapes[0].type,
+        geometry : populated_annos1[i].shapes[0].geometry
       }]
     }
     anno.addAnnotation(myAnno);

@@ -23,6 +23,8 @@
       }
     </script>
     <script type="text/javascript" src="{{ url_for('static', filename='annotorious/annotorious.min.js') }}"></script>
+    <!-- <script type="text/javascript" src="{{ url_for('static', filename='js/main.js') }}"></script> -->
+
   </head>
   {% if user == 'admin' %}
     <body>
@@ -33,9 +35,14 @@
       <form action="/{{ user }}" method="post">
         <button action="/{{ user }}" method="post" type="submit" value="Update Annotations"/>Update Annotations</button>
       </form>
-      <input name="show_all_annos" type="button" value="Show All Annotations" onclick="populate({{ populated_annos }});"/><br><br>
+      <input name="show_all_annos" type="button" value="Show All Annotations" onclick="populate({{ [populated_annos , points] }});"/><br><br>
+
+      <form>
+      <textarea style="display: none" id="annotationBox" readonly="readonly" cols="50" rows="10">This part of the textarea content is fixed and cannot be changed</textarea><br/>
+      </form>
+
       <input id="sign_out" type="button" value="Sign Out" onclick="signout();"/>
-      <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+      <script type="text/javascript" src="{{ url_for('static', filename='js/main.js') }}"></script>
     </body>
   {% else %}
     <body onload="handle_data();">
@@ -50,6 +57,13 @@
         <img src="{{ url_for('static', filename='images/mask.jpg') }}" class=annotatable width=600/>
       {% endif %}
       <input name="store_annos" type="button" value="Submit" onclick="store_annotations();"/><br><br>
+
+      <input name="show_all_annos" type="button" value="Show All Annotations" onclick="populate({{ [populated_annos , points] }});"/><br><br>
+
+      <form>
+      <textarea style="display: none" id="annotationBox" readonly="readonly" cols="50" rows="10">This part of the textarea content is fixed and cannot be changed</textarea><br/>
+      </form>
+
       <input id="sign_out" type="button" value="Sign Out" onclick="signout();"/>
       <form action="/{{ user }}" method="post">
         <button action="/{{ user }}" method="post" type="submit" value="Update Modules"/>Update Modules</button>
