@@ -14,6 +14,19 @@ function store_annotations() {
   }
 }
 
+function store_vid_annotations(timestamp, vid_anno) {
+  // var time = document.getElementById("timestamp")
+  // var vid_anno = document.getElementById("vid_anno")
+  console.log(typeof(timestamp))
+  console.log(vid_anno)
+  if (!timestamp || /^\s*$/.test(timestamp)) {
+    alert("Please input a time.")
+  } else {
+    // input into database
+    alert("Your annotation has been recorded.")
+  }
+}
+
 var mA = {
   src : 'http://127.0.0.1:5000/static/images/dog-park.jpg',
   text : 'My annotation',
@@ -23,15 +36,32 @@ var mA = {
   }]
 }
 
-function populate(populated_annos) {
-  console.log(populated_annos)
-  for (var i = 0; i < populated_annos.length; i++) {
+function populate(arr) {
+  // arr = [populated_annos, points]
+  // console.log(points1)
+  populated_annos1 = arr[0]
+  points1 = arr[1]
+  console.log(arr[0])
+  console.log(arr[1])
+
+  // if (typeof populated_annos1 == 'undefined'):
+  //   alert("There are no annotations to show.")
+  //   return
+  if (points1 >= 10) {
+    var annotationBox = document.getElementById("annotationBox")
+    annotationBox.style.display = "block"
+    console.log(annotationBox.style.display)
+    annotationBox.value = populated_annos1
+  } else {
+    alert("You don't have enough points.")
+  }
+  for (var i = 0; i < populated_annos1.length; i++) {
     var myAnno = {
-      src : populated_annos[i].src,
-      text : populated_annos[i].text,
+      src : populated_annos1[i].src,
+      text : populated_annos1[i].text,
       shapes : [{
-        type : populated_annos[i].shapes[0].type,
-        geometry : populated_annos[i].shapes[0].geometry
+        type : populated_annos1[i].shapes[0].type,
+        geometry : populated_annos1[i].shapes[0].geometry
       }]
     }
     anno.addAnnotation(myAnno);
