@@ -1,7 +1,10 @@
-from flask import Flask, render_template, redirect, url_for, request
-import pyrebase
-from cogsci import CogSciModule
+from flask import Flask, flash, redirect, render_template, request, url_for
 import json
+import logging
+import pyrebase
+import requests
+
+logging.basicConfig(filename='flask-server.log', level=logging.DEBUG)
 
 config = {
     "apiKey": "AIzaSyC6ce12c32OpCI7-u5ueRbfYhsw_fBnkwk",
@@ -10,55 +13,49 @@ config = {
     "storageBucket": "vip-ipcrowd.appspot.com"
 }
 firebase = pyrebase.initialize_app(config)
+auth = firebase.auth()
 
 app = Flask(__name__)
 
 @app.route('/')
-def mainpage():
-    return render_template('login.html')
-
-@app.route('/login')
+@app.route('/login', methods=['POST'])
 def login():
-    return render_template('login.html')
+	logging.info('Login page loaded')
+	return render_template('login.html')
 
-@app.route('/signup')
+@app.route('/signup', methods=['POST'])
 def signup():
     return render_template('signup.html')
 
-@app.route('/<user>', methods=['GET', 'POST'])
-def homepage(user=None):
-    #test = firebase.database().child("users").child("admin").get().val()
-    csm = CogSciModule()
-    input_annotations = []
-    populated_annos = []
-    other_annos = []
-    users = firebase.database().child("users").get()
-    # print(list(users.val()[user].keys()))
-    sample_anno = list(users.val()[user].keys())[0]
-    # print(sample_anno)
-    source = users.val()[user][sample_anno]['src']
-    # print(source)
-    for u in users.val():
-        # print(type(u))
-        # print(user)
-        if str(u) == user:
-            print("debug")
-            for anno in users.val()[u]:
-                input_annotations.append(users.val()[u][anno]['text'])
+@app.route('/handle_login', methods=['POST'])
+def handle_login():
+	email, password = request.form['email'], request.form['password']
+	logging.info('logging in user with email: {}'.format(email))
+	auth.sign_in_with_email_and_password(email, password)
+	logging.info('current user data: {}'.format(auth.current_user))
+	return render_template("home.html", user=email)
+	#TODO(rahulnambiar): handle invalid logins
 
-        else:
-            for anno in users.val()[u]:
-                # print(anno)
-                print(users.val()[u][anno]['src'])
-                if (source == users.val()[u][anno]['src']):
-                    other_annos.append(users.val()[u][anno]['text'])
-                populated_annos.append(users.val()[u][anno]['text'])
-    print(populated_annos)
-    print(input_annotations)
-    print(other_annos)
-    bias = csm.updateCurrentAnnotations(input_annotations)
-    points = len(input_annotations)
-    return render_template("homepage.html", user=user, bias=bias, points=points, populated_annos=populated_annos)
+@app.route('/handle_signup', methods=['POST'])
+def handle_signup():
+	if request.form['password'] != request.form['confirm_password']:
+		logging.info('passwords did not match')
+		return redirect('/')
+	first, last = request.form['first'], request.form['last']
+	user = '{} {}'.format(first, last)
+	email, password = request.form['email'], request.form['password']
+	logging.info('attempting to create user with email: {} and pass: {}'.format(
+		email, password))
+	auth.create_user_with_email_and_password(email, password)
+	logging.info('user name: {}\ncurrent user data: {}'.format(
+		user, auth.current_user))
+	return render_template("home.html", user=user)
+
+@app.route('/signout', methods=['POST'])
+def handle_signout():
+	logging.info('trying to sign out')
+	auth.current_user = None
+	return redirect('/')
 
 if __name__ == '__main__':
     app.run(debug=True, use_reloader=True)
