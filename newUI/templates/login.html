@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>IP Crowd - Login</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="{{ url_for('static', filename='assets/css/main.css') }}">
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body id="daytime" class="is-preload">
+		<div id="wrapper" class="flashes">
+			<article id="login" class="panel">
+				<header>
+					<h2>Welcome! Please log in</h2>
+				</header>
+				<form action="{{ url_for('handle_login') }}" method="post">
+					<div class="row">
+						<div class="off-2-xlarge">
+							<input id="email" type="text" name="email" placeholder="username" />
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="off-2-xlarge">
+							<input id="pass" type="password" name="password" placeholder="••••••••" />
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="off-3-5-xlarge">
+							<input id="login" type="submit" value="Log In" onclick=""/>
+						</div>
+					</div>
+					<br>
+				</form>
+				<h2>New User?</h2><br>
+				<form action="{{ url_for('signup') }}" method="post">
+					<div class="row">
+						<div class="off-3-5-xlarge">
+							<input id="sign-up" type="submit" value="Sign Up" onclick=""/>
+						</div>
+					</div>
+				</form>
+				</form>
+			</article>
+		</div>
+		<!-- Scripts -->
+		<script src="{{ url_for('static', filename='assets/js/jquery.min.js') }}"></script>
+		<script src="{{ url_for('static', filename='assets/js/browser.min.js') }}"></script>
+		<script src="{{ url_for('static', filename='assets/js/breakpoints.min.js') }}"></script>
+		<script src="{{ url_for('static', filename='assets/js/util.js') }}"></script>
+		<script src="{{ url_for('static', filename='assets/js/main.js') }}"></script>
+		<script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
+		<script>
+			// Initialize Firebase
+			var config = {
+				apiKey: "AIzaSyC6ce12c32OpCI7-u5ueRbfYhsw_fBnkwk",
+				authDomain: "vip-ipcrowd.firebaseapp.com",
+				databaseURL: "https://vip-ipcrowd.firebaseio.com",
+				projectId: "vip-ipcrowd",
+				storageBucket: "vip-ipcrowd.appspot.com",
+				messagingSenderId: "80658497046"
+			};
+			firebase.initializeApp(config);
+		</script>
+	</body>
+</html>
