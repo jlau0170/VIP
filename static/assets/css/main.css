@@ -1303,28 +1303,34 @@ input, select, textarea {
 		box-sizing: inherit;
 	}
 
+	#bigHr {
+		background-color: #000000 !important;
+    color: #000000 !important;
+    height: 2px !important;
+	}
+
 	#name {
 		background-color: transparent;
 		border: none;
-	    cursor: text;
-	    overflow: hidden;
-	    outline: none;
+    cursor: text;
+    overflow: hidden;
+    outline: none;
 	}
 
 	#email {
 		background-color: transparent;
 		border: none;
-	    cursor: text;
-	    overflow: hidden;
-	    outline: none;
+    cursor: text;
+    overflow: hidden;
+    outline: none;
 	}
 
 	#pass {
 		background-color: transparent;
 		border: none;
-	    cursor: text;
-	    overflow: hidden;
-	    outline: none;
+    cursor: text;
+    overflow: hidden;
+    outline: none;
 	}
 
 	#midwrapper {
