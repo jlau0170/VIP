@@ -91,9 +91,9 @@ def handle_signup():
         return redirect('/')
     first, last = request.form['first'], request.form['last']
     user = '{} {}'.format(first, last)
-    uid = email.split('@')[0]
     points = DEFAULT_PTS
     email, password = request.form['email'], request.form['password']
+    uid = email.split('@')[0]
     logging.info('attempting to create user with email: {} and pass: {}'.format(
     email, password))
     logged_user = auth.create_user_with_email_and_password(email, password)
@@ -118,7 +118,7 @@ def go_home():
     rankings = _get_rankings(user, TOP_N)
     points = _get_points(uid)
     return render_template('home.html', user=user, points=points,
-    rankings=rankings, top_n=TOP_N, scenario_urls=scenario_urls)
+        rankings=rankings, top_n=TOP_N, scenario_urls=scenario_urls)
 
 
 @app.route('/signout', methods=['POST'])
