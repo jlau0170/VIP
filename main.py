@@ -5,6 +5,7 @@ import json
 import logging
 import pyrebase
 import requests
+import sys
 
 logging.basicConfig(filename='flask-server.log', level=logging.DEBUG)
 
