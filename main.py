@@ -20,9 +20,10 @@ firebase = pyrebase.initialize_app(config)
 auth = firebase.auth()
 db = firebase.database()
 storage = firebase.storage()
+id_token = None
 
 def _get_num_imgs(scenario_title):
-    scenarios = db.child('scenario_metadata/scenarios').get()
+    scenarios = db.child('scenario_metadata/scenarios').get(token=id_token)
     for scenario in scenarios.each():
         if scenario.val()['title'] == scenario_title:
             logging.info('number of images in this scenario: {}'.format(len(scenario.val()['images'])))
@@ -34,7 +35,7 @@ def _get_scenario_urls():
 
 def _build_url_dict():
     urls = defaultdict(lambda: defaultdict(str))
-    scenarios = db.child('scenario_metadata/scenarios').get()
+    scenarios = db.child('scenario_metadata/scenarios').get(token=id_token)
     for scenario in scenarios.each():
         urls[scenario.val()['title']] = scenario.val()['images']
     return urls
@@ -57,13 +58,15 @@ def login():
 @app.route('/home', methods=['POST'])
 def handle_login():
     email, password = request.form['email'], request.form['password']
-    uid = email.split('@')[0]
-    user = db.child('users/{}/display_name'.format(uid)).get().val()
     try:
-        auth.sign_in_with_email_and_password(email, password)
+        logged_user = auth.sign_in_with_email_and_password(email, password)
+        id_token = logged_user['idToken']
     except:
         return render_template('login.html', login_error=True)
     else:
+        uid = email.split('@')[0]
+        user = db.child('users/{}/display_name'.format(uid)).get(
+            token=id_token).val()
         rankings = _get_rankings(user, TOP_N)
         logging.info('rankings: {}'.format(rankings))
         points = _get_points(uid)
@@ -94,12 +97,13 @@ def handle_signup():
     email, password = request.form['email'], request.form['password']
     logging.info('attempting to create user with email: {} and pass: {}'.format(
     email, password))
-    auth.create_user_with_email_and_password(email, password)
+    logged_user = auth.create_user_with_email_and_password(email, password)
+    id_token = logged_user['idToken']
     logging.info('user name: {}\ncurrent user data: {}'.format(
     user, auth.current_user))
-    db.child('users/{}/display_name'.format(uid)).set(user)
-    db.child('users/{}/email'.format(uid)).set(email)
-    db.child('users/{}/points'.format(uid)).set(points)
+    db.child('users/{}/display_name'.format(uid)).set(user, token=id_token)
+    db.child('users/{}/email'.format(uid)).set(email, token=id_token)
+    db.child('users/{}/points'.format(uid)).set(points, token=id_token)
     rankings = _get_rankings(user, TOP_N)
     scenario_urls = _get_scenario_urls()
     return render_template("home.html",
@@ -147,7 +151,7 @@ def show_scenario():
 
 def _get_display_name():
     email = auth.current_user['email']
-    users = db.child('users').get()
+    users = db.child('users').get(token=id_token)
     for user in users.each():
         if user.val()['email'] == email:
             return user.val()['display_name']
@@ -160,7 +164,7 @@ def _get_uid():
 
 def _get_rankings(display_name, top_n):
     rankings = []
-    users = db.child('users').get()
+    users = db.child('users').get(token=id_token)
     for user in users.each():
         pyre_user = user.val()
         logging.info('pyre_user: {}'.format(pyre_user))
@@ -174,7 +178,8 @@ def _get_rankings(display_name, top_n):
 
 
 def _get_points(uid):
-    return int(db.child('users/{}/points'.format(uid)).get().val())
+    return int(db.child('users/{}/points'.format(uid)).get(
+        token=id_token).val())
 
 
 if __name__ == '__main__':
