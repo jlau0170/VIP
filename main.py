@@ -1,5 +1,5 @@
 from collections import defaultdict
-from firebase_admin
+import firebase_admin
 from flask import Flask, flash, redirect, render_template, request, url_for
 import json
 import logging
