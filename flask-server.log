@@ -18732,3 +18732,45 @@ DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): vip-ipcrowd.fire
 DEBUG:urllib3.connectionpool:https://vip-ipcrowd.firebaseio.com:443 "GET /scenario_metadata/scenarios.json HTTP/1.1" 200 1109
 WARNING:werkzeug: * Debugger is active!
 INFO:werkzeug: * Debugger PIN: 268-370-831
+INFO:werkzeug: * Detected change in '/Users/Rahul/Documents/VIP/VIP/main.py', reloading
+INFO:werkzeug: * Restarting with stat
+DEBUG:urllib3.util.retry:Converted retries value: 3 -> Retry(total=3, connect=None, read=None, redirect=None, status=None)
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): vip-ipcrowd.firebaseio.com
+DEBUG:urllib3.connectionpool:https://vip-ipcrowd.firebaseio.com:443 "GET /scenario_metadata/scenarios.json HTTP/1.1" 200 1109
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 268-370-831
+INFO:werkzeug: * Detected change in '/Users/Rahul/Documents/VIP/VIP/main.py', reloading
+INFO:werkzeug: * Restarting with stat
+DEBUG:urllib3.util.retry:Converted retries value: 3 -> Retry(total=3, connect=None, read=None, redirect=None, status=None)
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): vip-ipcrowd.firebaseio.com
+DEBUG:urllib3.connectionpool:https://vip-ipcrowd.firebaseio.com:443 "GET /scenario_metadata/scenarios.json HTTP/1.1" 200 1109
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 268-370-831
+INFO:werkzeug: * Detected change in '/Users/Rahul/Documents/VIP/VIP/main.py', reloading
+INFO:werkzeug: * Restarting with stat
+DEBUG:urllib3.util.retry:Converted retries value: 3 -> Retry(total=3, connect=None, read=None, redirect=None, status=None)
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): vip-ipcrowd.firebaseio.com
+DEBUG:urllib3.connectionpool:https://vip-ipcrowd.firebaseio.com:443 "GET /scenario_metadata/scenarios.json HTTP/1.1" 200 1109
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 268-370-831
+INFO:werkzeug: * Detected change in '/Users/Rahul/Documents/VIP/VIP/main.py', reloading
+INFO:werkzeug: * Restarting with stat
+DEBUG:urllib3.util.retry:Converted retries value: 3 -> Retry(total=3, connect=None, read=None, redirect=None, status=None)
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): vip-ipcrowd.firebaseio.com
+DEBUG:urllib3.connectionpool:https://vip-ipcrowd.firebaseio.com:443 "GET /scenario_metadata/scenarios.json HTTP/1.1" 200 1109
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 268-370-831
+INFO:werkzeug: * Detected change in '/Users/Rahul/Documents/VIP/VIP/main.py', reloading
+INFO:werkzeug: * Restarting with stat
+DEBUG:urllib3.util.retry:Converted retries value: 3 -> Retry(total=3, connect=None, read=None, redirect=None, status=None)
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): vip-ipcrowd.firebaseio.com
+DEBUG:urllib3.connectionpool:https://vip-ipcrowd.firebaseio.com:443 "GET /scenario_metadata/scenarios.json HTTP/1.1" 200 1109
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 268-370-831
+INFO:werkzeug: * Detected change in '/Users/Rahul/Documents/VIP/VIP/main.py', reloading
+INFO:werkzeug: * Restarting with stat
+DEBUG:urllib3.util.retry:Converted retries value: 3 -> Retry(total=3, connect=None, read=None, redirect=None, status=None)
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): vip-ipcrowd.firebaseio.com
+DEBUG:urllib3.connectionpool:https://vip-ipcrowd.firebaseio.com:443 "GET /scenario_metadata/scenarios.json HTTP/1.1" 200 1109
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 268-370-831

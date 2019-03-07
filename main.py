@@ -70,6 +70,7 @@ def handle_login():
         logging.info('rankings: {}'.format(rankings))
         points = _get_points(uid)
         scenario_urls = _get_scenario_urls()
+        print('handle_login else call current user: {}'.format(auth.current_user))
         logging.info('logging in user with email: {}'.format(email))
         logging.info('current user data: {}'.format(auth.current_user))
         logging.info('scenario_urls: {}'.format(str(scenario_urls)))
@@ -177,5 +178,4 @@ def _get_points(uid):
 
 
 if __name__ == '__main__':
-    print('rerun!!!!!!!')
     app.run(debug=True, use_reloader=True)
