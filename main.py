@@ -61,6 +61,7 @@ def handle_login():
     try:
         auth.sign_in_with_email_and_password(email, password)
         print(auth.current_user)
+        print('id: {}'.format(id(auth)))
     except:
         return render_template('login.html', login_error=True)
     else:
@@ -153,6 +154,7 @@ def _get_display_name():
 def _get_uid():
     logging.info('current user: {}'.format(auth.current_user))
     print('current user: {}'.format(auth.current_user))
+    print('id: {}'.format(id(auth)))
     return auth.current_user['email'].split('@')[0]
 
 
