@@ -56,8 +56,7 @@ def homepage(user=None):
     print(populated_annos)
     print(input_annotations)
     print(other_annos)
-    bias = csm.updateCurrentAnnotations(input_annotations)
-    points = len(input_annotations)
+    bias, points = csm.updateCurrentAnnotations(input_annotations)
     return render_template("homepage.html", user=user, bias=bias, points=points, populated_annos=populated_annos)
 
 if __name__ == '__main__':

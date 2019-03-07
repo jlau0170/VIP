@@ -22,6 +22,7 @@ class CogSciModule(object):
 
 
     def updateCurrentAnnotations(self, ls_new_annotations):
+        points = 0
         if (type(ls_new_annotations) is not type([])):
             if (type(ls_new_annotations) is not type('string')):
                 raise ValueError('Please enter a list of strings or string')
@@ -38,12 +39,16 @@ class CogSciModule(object):
                 for word in hypo:
                     word = " " + word + " "
                     if word in self.locations:
+                        points += 1
                         self.topics['location'] += 1
                     elif word in self.times:
+                        points += 1
                         self.topics['time'] += 1
                     elif word in self.persons:
+                        points += 1
                         self.topics['person'] += 1
                     elif word in self.nature:
+                        points += 1
                         self.topics['nature'] += 1
         self.maxTopic = max(self.topics.items(), key=operator.itemgetter(1))[0]
         self.toggle = not self.toggle
@@ -53,7 +58,7 @@ class CogSciModule(object):
             self.anchoringBias()
 
         self.counter += 1
-        return self.question
+        return self.question, points
 
     def confirmationBias(self):
         if (self.toggle):
