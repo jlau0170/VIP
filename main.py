@@ -61,6 +61,7 @@ def handle_login():
     try:
         logged_user = auth.sign_in_with_email_and_password(email, password)
         id_token = logged_user['idToken']
+        print(auth.current_user)
     except:
         return render_template('login.html', login_error=True)
     else:
