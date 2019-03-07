@@ -123,6 +123,7 @@ def go_home():
 @app.route('/signout', methods=['POST'])
 def handle_signout():
     logging.info('trying to sign out')
+    logging.info('handle_signout else call current user: {}'.format(auth.current_user))
     auth.current_user = None
     return redirect('/')
 
