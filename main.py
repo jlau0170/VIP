@@ -1,5 +1,5 @@
 from collections import defaultdict
-from firebase_admin import credentials
+from firebase_admin
 from flask import Flask, flash, redirect, render_template, request, url_for
 import json
 import logging
@@ -8,7 +8,6 @@ import requests
 
 logging.basicConfig(filename='flask-server.log', level=logging.DEBUG)
 
-cred = credentials.Certificate('vip-ipcrowd-firebase-adminsdk-4mwoc-5aa0f5640e.json')
 config = {
     "apiKey": "AIzaSyC6ce12c32OpCI7-u5ueRbfYhsw_fBnkwk",
     "authDomain": "vip-ipcrowd.firebaseapp.com",
