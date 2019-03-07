@@ -21,6 +21,7 @@ auth = firebase.auth()
 db = firebase.database()
 storage = firebase.storage()
 id_token = None
+logged_user = None
 
 def _get_num_imgs(scenario_title):
     scenarios = db.child('scenario_metadata/scenarios').get(token=id_token)
@@ -126,6 +127,8 @@ def go_home():
 def handle_signout():
     logging.info('trying to sign out')
     auth.current_user = None
+    logged_user = None
+    id_token = None
     return redirect('/')
 
 
@@ -135,7 +138,6 @@ def show_scenario():
     logging.info('API request form: {}'.format(str(request.form)))
     scenario_name = request.form.get('scenario_name', None)
     cur_iter = int(request.form.get('cur_iter', None)) + 1
-    db_path = 'scenario_metadata/scenarios/{}/num_imgs'.format(scenario_name)
     num_imgs = _get_num_imgs(scenario_name)
     uid = _get_uid()
     if cur_iter < num_imgs:
@@ -150,7 +152,7 @@ def show_scenario():
 
 
 def _get_display_name():
-    email = auth.current_user['email']
+    email = logged_user['email']
     users = db.child('users').get(token=id_token)
     for user in users.each():
         if user.val()['email'] == email:
@@ -159,9 +161,8 @@ def _get_display_name():
 
 
 def _get_uid():
-    logging.info('current user: {}'.format(auth.current_user))
-    print('current user: {}'.format(auth.current_user))
-    return auth.current_user['email'].split('@')[0]
+    print('current user: {}'.format(logged_user))
+    return logged_user['email'].split('@')[0]
 
 
 def _get_rankings(display_name, top_n):
