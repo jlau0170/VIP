@@ -1,17 +1,32 @@
-var annotations_map = new Object()
+var annotations_map = new Object();
 
-function generate_id(annotation) {
-  var id = annotation.text.substring(0,1) + annotation.text.length;
-  var randint = Math.floor(Math.random() * 10000);
-  id += randint + annotation.text.substring(annotation.text.length - 1, annotation.text.length);
+function generate_id() {
+  const ID_LENGTH = 10
+  var chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
+  var id = '';
+  for (var i = 0; i < ID_LENGTH; i++) {
+    var rand_index = Math.floor(Math.random() * chars.length);
+    id += chars.substring(rand_index, rand_index+1);
+  }
   return id;
 }
 
 function store_annotations() {
+  console.log('storing annotations');
+  console.log(annotations_map);
+  var username = document.getElementById("username").value;
+  console.log(username);
   for (var key in annotations_map) {
-    var username = firebase.auth().currentUser.email.split('@')[0];
-    firebase.database().ref('users/' + username + '/' + key).set(annotations_map[key]);
+    firebase.database().ref('users/' + username + '/annotations/' + key).set(annotations_map[key]);
   }
+  setTimeout(function(){
+    console.log('received response from firebase');
+    document.forms['myform'].submit();
+  }, 1000);
+}
+
+function firebase_buffer() {
+  console.log('transaction complete');
 }
 
 function store_vid_annotations(timestamp, vid_anno) {
@@ -73,7 +88,7 @@ function handle_data() {
   anno.addHandler('onAnnotationCreated', function(annotation) {
     var geometry = annotation.shapes[0].geometry;
     console.log(annotation);
-    unique_id = generate_id(annotation);
+    unique_id = generate_id();
     annotations_map[unique_id] = annotation;
     console.log(annotations_map);
   });

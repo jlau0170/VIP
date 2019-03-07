@@ -1,0 +1,7 @@
+# Don't track contents of the following
+
+# Folders
+__pycache__/
+
+# Compiled sources
+*.log
