@@ -46,7 +46,7 @@ DEFAULT_PTS = 0
 
 app = Flask(__name__)
 app.logger.addHandler(logging.StreamHandler(sys.stdout))
-app.logger.setLevel(logging.ERROR)
+app.logger.setLevel(logging.INFO)
 
 @app.route('/')
 @app.route('/login', methods=['POST'])
@@ -159,6 +159,7 @@ def _get_display_name():
 
 
 def _get_uid():
+    logging.inf('current user: {}'.format(auth.current_user))
     return auth.current_user['email'].split('@')[0]
 
 
