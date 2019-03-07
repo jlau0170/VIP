@@ -20,7 +20,6 @@ firebase = pyrebase.initialize_app(config)
 auth = firebase.auth()
 db = firebase.database()
 storage = firebase.storage()
-id_token = None
 
 def _get_num_imgs(scenario_title):
     scenarios = db.child('scenario_metadata/scenarios').get()
@@ -178,4 +177,5 @@ def _get_points(uid):
 
 
 if __name__ == '__main__':
+    print('rerun!!!!!!!')
     app.run(debug=True, use_reloader=True)
