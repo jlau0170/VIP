@@ -160,6 +160,7 @@ def _get_display_name():
 
 def _get_uid():
     logging.info('current user: {}'.format(auth.current_user))
+    print('current user: {}'.format(auth.current_user))
     return auth.current_user['email'].split('@')[0]
 
 
