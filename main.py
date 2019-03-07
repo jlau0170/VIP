@@ -43,7 +43,8 @@ TOP_N = 3
 DEFAULT_PTS = 0
 
 app = Flask(__name__)
-
+app.logger.addHandler(logging.StreamHandler(sys.stdout))
+app.logger.setLevel(logging.ERROR)
 
 @app.route('/')
 @app.route('/login', methods=['POST'])

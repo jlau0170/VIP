@@ -17709,3 +17709,110 @@ INFO:werkzeug:127.0.0.1 - - [07/Mar/2019 02:40:37] "GET /static/assets/js/util.j
 INFO:werkzeug:127.0.0.1 - - [07/Mar/2019 02:40:37] "GET /static/assets/js/breakpoints.min.js HTTP/1.1" 200 -
 INFO:werkzeug:127.0.0.1 - - [07/Mar/2019 02:40:37] "GET /static/assets/js/browser.min.js HTTP/1.1" 200 -
 INFO:werkzeug:127.0.0.1 - - [07/Mar/2019 02:40:37] "GET /static/assets/css/font-awesome.min.css HTTP/1.1" 200 -
+DEBUG:urllib3.util.retry:Converted retries value: 3 -> Retry(total=3, connect=None, read=None, redirect=None, status=None)
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): vip-ipcrowd.firebaseio.com
+DEBUG:urllib3.connectionpool:https://vip-ipcrowd.firebaseio.com:443 "GET /scenario_metadata/scenarios.json HTTP/1.1" 200 1135
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:werkzeug: * Restarting with stat
+DEBUG:urllib3.util.retry:Converted retries value: 3 -> Retry(total=3, connect=None, read=None, redirect=None, status=None)
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): vip-ipcrowd.firebaseio.com
+DEBUG:urllib3.connectionpool:https://vip-ipcrowd.firebaseio.com:443 "GET /scenario_metadata/scenarios.json HTTP/1.1" 200 1135
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 268-370-831
+INFO:root:Login page loaded
+INFO:werkzeug:127.0.0.1 - - [07/Mar/2019 03:19:48] "GET / HTTP/1.1" 200 -
+DEBUG:urllib3.connectionpool:https://vip-ipcrowd.firebaseio.com:443 "GET /users/user3/display_name.json HTTP/1.1" 200 12
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.googleapis.com
+DEBUG:urllib3.connectionpool:https://www.googleapis.com:443 "POST /identitytoolkit/v3/relyingparty/verifyPassword?key=AIzaSyC6ce12c32OpCI7-u5ueRbfYhsw_fBnkwk HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:https://vip-ipcrowd.firebaseio.com:443 "GET /users.json HTTP/1.1" 200 5814
+INFO:root:pyre_user: {'display_name': 'admin', 'email': 'admin@ipcrowd.com', 'points': -1}
+INFO:root:pyre_user: {'display_name': 'Albert Xing', 'email': 'axing6@gatech.edu', 'points': 44}
+INFO:root:pyre_user: {'annotations': {'c106464y': {'context': 'http://127.0.0.1:5000/scenario', 'shapes': [{'geometry': {'height': 0.535181236673774, 'width': 0.4683333333333333, 'x': 0.3383333333333333, 'y': 0.24733475479744135}, 'type': 'rect'}], 'src': 'https://firebasestorage.googleapis.com/v0/b/vip-ipcrowd.appspot.com/o/images%2Fscenario_2%2Fscenario_2_1.jpg?alt=media&token=0628ed09-3aab-4ded-91c1-ca9e36dd9b6a', 'text': 'cute puppy'}, 'c43564e': {'context': 'http://127.0.0.1:5000/scenario', 'shapes': [{'geometry': {'height': 0.300561797752809, 'width': 0.165, 'x': 0.4033333333333333, 'y': 0.2893258426966292}, 'type': 'rect'}], 'src': 'https://firebasestorage.googleapis.com/v0/b/vip-ipcrowd.appspot.com/o/images%2Fscenario_1%2Fscenario_1_2.jpg?alt=media&token=d3173af1-f2e0-49a1-ae46-1ec00f4762a2', 'text': 'cute'}, 'c83723n': {'context': 'http://127.0.0.1:5000/scenario', 'shapes': [{'geometry': {'height': 0.5107398568019093, 'width': 0.455, 'x': 0.32166666666666666, 'y': 0.24105011933174225}, 'type': 'rect'}], 'src': 'https://firebasestorage.googleapis.com/v0/b/vip-ipcrowd.appspot.com/o/images%2Fscenario_2%2Fscenario_2_2.jpg?alt=media&token=e403018c-f977-4298-91d6-f60802c1d797', 'text': 'corgicon'}, 'o48488!': {'context': 'http://127.0.0.1:5000/scenario', 'shapes': [{'geometry': {'height': 0.4079601990049751, 'width': 0.325, 'x': 0.34833333333333333, 'y': 0.34328358208955223}, 'type': 'rect'}], 'src': 'https://firebasestorage.googleapis.com/v0/b/vip-ipcrowd.appspot.com/o/images%2Fscenario_2%2Fscenario_2_0.jpg?alt=media&token=451c2e9c-5bc3-4fac-ae6b-46a8d2e5cc38', 'text': 'omg!'}, 'p124386g': {'context': 'http://127.0.0.1:5000/scenario', 'shapes': [{'geometry': {'height': 0.40332640332640335, 'width': 0.4083333333333333, 'x': 0.35333333333333333, 'y': 0.30353430353430355}, 'type': 'rect'}], 'src': 'https://firebasestorage.googleapis.com/v0/b/vip-ipcrowd.appspot.com/o/images%2Fscenario_1%2Fscenario_1_0.jpg?alt=media&token=5490d5be-6fa9-498f-894e-3c38b1e5e155', 'text': 'pup on swing'}}, 'display_name': 'Rhea Sharma', 'email': 'rsharma5@uga.edu', 'points': 20}
+INFO:root:pyre_user: {'display_name': 'Jane Doe', 'email': 'user1@ipcrowd.com', 'points': 5}
+INFO:root:pyre_user: {'annotations': {'iafiagbacj': {'context': 'http://127.0.0.1:5000/scenario', 'shapes': [{'geometry': {'height': 0.5918854415274463, 'width': 0.4866666666666667, 'x': 0.335, 'y': 0.12171837708830549}, 'type': 'rect'}], 'src': 'https://firebasestorage.googleapis.com/v0/b/vip-ipcrowd.appspot.com/o/images%2Fscenario_2%2Fscenario_2_2.jpg?alt=media&token=e403018c-f977-4298-91d6-f60802c1d797', 'text': 'so cute!'}}, 'display_name': 'Rob Shultz', 'email': 'user2@ipcrowd.com', 'points': 40}
+INFO:root:pyre_user: {'annotations': {'8a9fzh9w6r': {'context': 'http://127.0.0.1:5000/scenario', 'shapes': [{'geometry': {'height': 0.340956340956341, 'width': 0.19666666666666666, 'x': 0.5383333333333333, 'y': 0.27442827442827444}, 'type': 'rect'}], 'src': 'https://firebasestorage.googleapis.com/v0/b/vip-ipcrowd.appspot.com/o/images%2Fscenario_1%2Fscenario_1_0.jpg?alt=media&token=5490d5be-6fa9-498f-894e-3c38b1e5e155', 'text': 'vvvvv'}, '9qp55ygib7': {'context': 'http://127.0.0.1:5000/scenario', 'shapes': [{'geometry': {'height': 0.3700623700623701, 'width': 0.18833333333333332, 'x': 0.6383333333333333, 'y': 0.2494802494802495}, 'type': 'rect'}], 'src': 'https://firebasestorage.googleapis.com/v0/b/vip-ipcrowd.appspot.com/o/images%2Fscenario_1%2Fscenario_1_0.jpg?alt=media&token=5490d5be-6fa9-498f-894e-3c38b1e5e155', 'text': 'tail'}, 'ayjur9mog9': {'context': 'http://127.0.0.1:5000/scenario', 'shapes': [{'geometry': {'height': 0.21621621621621623, 'width': 0.24666666666666667, 'x': 0.355, 'y': 0.19334719334719336}, 'type': 'rect'}], 'src': 'https://firebasestorage.googleapis.com/v0/b/vip-ipcrowd.appspot.com/o/images%2Fscenario_1%2Fscenario_1_0.jpg?alt=media&token=5490d5be-6fa9-498f-894e-3c38b1e5e155', 'text': 'back'}, 'bzedmp6w6z': {'context': 'http://127.0.0.1:5000/scenario', 'shapes': [{'geometry': {'height': 0.20983213429256595, 'width': 0.385, 'x': 0.2866666666666667, 'y': 0.2314148681055156}, 'type': 'rect'}], 'src': 'https://firebasestorage.googleapis.com/v0/b/vip-ipcrowd.appspot.com/o/images%2Fscenario_1%2Fscenario_1_1.jpg?alt=media&token=a2ddd489-3573-4c3c-8ef3-3a88cf3e999e', 'text': 'cute poodle mix'}, 'hd6p515hid': {'context': 'http://127.0.0.1:5000/scenario', 'shapes': [{'geometry': {'height': 0.058212058212058215, 'width': 0.63, 'x': 0.07166666666666667, 'y': 0.6299376299376299}, 'type': 'rect'}], 'src': 'https://firebasestorage.googleapis.com/v0/b/vip-ipcrowd.appspot.com/o/images%2Fscenario_1%2Fscenario_1_0.jpg?alt=media&token=5490d5be-6fa9-498f-894e-3c38b1e5e155', 'text': 'wood'}, 'key': {'context': 'http://127.0.0.1:5000/scenario', 'shapes': [{'geometry': {'height': 0.6133056133056133, 'width': 0.58, 'x': 0.22666666666666666, 'y': 0.19542619542619544}, 'type': 'rect'}], 'src': 'https://firebasestorage.googleapis.com/v0/b/vip-ipcrowd.appspot.com/o/images%2Fscenario_1%2Fscenario_1_0.jpg?alt=media&token=5490d5be-6fa9-498f-894e-3c38b1e5e155', 'text': 'dog'}, 'o1raz8d3e5': {'context': 'http://127.0.0.1:5000/scenario', 'shapes': [{'geometry': {'height': 0.3804573804573805, 'width': 0.2866666666666667, 'x': 0.3616666666666667, 'y': 0.26195426195426197}, 'type': 'rect'}], 'src': 'https://firebasestorage.googleapis.com/v0/b/vip-ipcrowd.appspot.com/o/images%2Fscenario_1%2Fscenario_1_0.jpg?alt=media&token=5490d5be-6fa9-498f-894e-3c38b1e5e155', 'text': 'forms'}, 'oxpumqfxky': {'context': 'https://vip-ipcrowd.herokuapp.com/scenario', 'shapes': [{'geometry': {'height': 0.41995841995842, 'width': 0.25833333333333336, 'x': 0.37166666666666665, 'y': 0.1995841995841996}, 'type': 'rect'}], 'src': 'https://firebasestorage.googleapis.com/v0/b/vip-ipcrowd.appspot.com/o/images%2Fscenario_1%2Fscenario_1_0.jpg?alt=media&token=5490d5be-6fa9-498f-894e-3c38b1e5e155', 'text': 'dog'}}, 'display_name': 'Emily Phan', 'email': 'user3@ipcrowd.com', 'points': 65}
+INFO:root:rankings: [(1, 65, 'Emily Phan'), (2, 44, 'Albert Xing'), (3, 40, 'Rob Shultz')]
+DEBUG:urllib3.connectionpool:https://vip-ipcrowd.firebaseio.com:443 "GET /users/user3/points.json HTTP/1.1" 200 2
+INFO:root:logging in user with email: user3@ipcrowd.com
+INFO:root:current user data: {'kind': 'identitytoolkit#VerifyPasswordResponse', 'localId': 'G7ZfEhxNttPERWGrmzNukrord912', 'email': 'user3@ipcrowd.com', 'displayName': '', 'idToken': 'eyJhbGciOiJSUzI1NiIsImtpZCI6IjkwYmVmMzI2MmVkMzI0MzZkNzhlMjdjYWJhYzg3YmIwZWUxZGYwYzIiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vdmlwLWlwY3Jvd2QiLCJhdWQiOiJ2aXAtaXBjcm93ZCIsImF1dGhfdGltZSI6MTU1MTk0Njc5MywidXNlcl9pZCI6Ikc3WmZFaHhOdHRQRVJXR3Jtek51a3JvcmQ5MTIiLCJzdWIiOiJHN1pmRWh4TnR0UEVSV0dybXpOdWtyb3JkOTEyIiwiaWF0IjoxNTUxOTQ2NzkzLCJleHAiOjE1NTE5NTAzOTMsImVtYWlsIjoidXNlcjNAaXBjcm93ZC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidXNlcjNAaXBjcm93ZC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.h2CHNpuE8NE7S3pe8ZOPNdTQSqptlL2ENks-81VrmTTmEpbDH6U4jrLrZTkToh7utigJChUJErWS4EhxTG6RabNOYS2rUv_YvLiKBN0Ei_5ZmvR2JuYxKbEbCCiaSJU84cbUdedcPmym3S-pc5Gdez5R1KBvDY5UKYmXdKI-MHxa4wGAvdRhs5B332isx7fE8WqZw4QbCWRCx76VhIKTwL4z9FlBUOpbqoz9sXnmCUc-OFARHfWd0GqGa_tutnxyw4DeIJyTbdcQSpySW8E421Ln5FENK_IeWR06_5Y2Qbxi_DnaY7O95DOZdFwVgLNYBmwn_spnkcAhlgo553HJJg', 'registered': True, 'refreshToken': 'AEu4IL2AIOJA8zKmBlTb4XJEVB9gBsuU6GS5CQRQOFdXlJ4HjvlXR1XSWB66nehrvBG4wKfadwiu6oDYB59JuUFWsxDFFufnQDjUSmNQ3kodNXEKTpHdbzvP2JJKWbBhxuKOv7GlsTA3TXItGnmUSHOBVtzQA4RH66MrkaabPzA4inwNMF4OEt0OkALSZkTN_KoJx2u6EWdQ', 'expiresIn': '3600'}
+INFO:root:scenario_urls: [('Dog Park', 'https://firebasestorage.googleapis.com/v0/b/vip-ipcrowd.appspot.com/o/images%2Fscenario_1%2Fscenario_1_0.jpg?alt=media&token=5490d5be-6fa9-498f-894e-3c38b1e5e155'), ('Triplets', 'https://firebasestorage.googleapis.com/v0/b/vip-ipcrowd.appspot.com/o/images%2Fscenario_2%2Fscenario_2_0.jpg?alt=media&token=451c2e9c-5bc3-4fac-ae6b-46a8d2e5cc38')]
+INFO:werkzeug:127.0.0.1 - - [07/Mar/2019 03:19:53] "POST /home HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Mar/2019 03:19:53] "GET /static/images/me.jpg HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Mar/2019 03:19:53] "GET /static/assets/css/images/overlay.png HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Mar/2019 03:19:53] "GET /static/assets/css/images/bg.jpg HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Mar/2019 03:19:53] "GET /static/assets/fonts/fontawesome-webfont.woff2?v=4.7.0 HTTP/1.1" 200 -
+INFO:root:no way: None
+INFO:root:API request form: ImmutableMultiDict([('scenario_name', 'Dog Park'), ('cur_iter', '-1')])
+DEBUG:urllib3.connectionpool:https://vip-ipcrowd.firebaseio.com:443 "GET /scenario_metadata/scenarios.json HTTP/1.1" 200 1135
+INFO:root:number of images in this scenario: 3
+INFO:werkzeug:127.0.0.1 - - [07/Mar/2019 03:20:03] "POST /scenario HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Mar/2019 03:20:03] "GET /static/assets/css/main.css HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Mar/2019 03:20:03] "GET /static/assets/js/annotorious/annotorious.css HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Mar/2019 03:20:03] "GET /static/assets/js/annotorious/annotorious.min.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Mar/2019 03:20:03] "GET /static/assets/js/anno_utils.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Mar/2019 03:20:03] "GET /static/assets/js/jquery.min.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Mar/2019 03:20:03] "GET /static/assets/css/font-awesome.min.css HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Mar/2019 03:20:03] "GET /static/assets/js/browser.min.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Mar/2019 03:20:03] "GET /static/assets/js/breakpoints.min.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Mar/2019 03:20:04] "GET /static/assets/js/util.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Mar/2019 03:20:04] "GET /static/assets/js/main.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Mar/2019 03:20:04] "GET /static/assets/css/images/overlay.png HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Mar/2019 03:20:04] "GET /static/assets/css/images/bg.jpg HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Mar/2019 03:20:04] "GET /static/assets/fonts/fontawesome-webfont.woff2?v=4.7.0 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Mar/2019 03:20:04] "GET /static/assets/js/annotorious/pencil.png HTTP/1.1" 404 -
+INFO:werkzeug:127.0.0.1 - - [07/Mar/2019 03:20:04] "GET /static/assets/js/annotorious/delete.png HTTP/1.1" 404 -
+INFO:werkzeug:127.0.0.1 - - [07/Mar/2019 03:20:04] "GET /static/assets/js/annotorious/feather_icon.png HTTP/1.1" 404 -
+INFO:root:no way: None
+INFO:root:API request form: ImmutableMultiDict([('cur_iter', '0'), ('scenario_name', 'Dog Park'), ('username', 'user3')])
+DEBUG:urllib3.connectionpool:https://vip-ipcrowd.firebaseio.com:443 "GET /scenario_metadata/scenarios.json HTTP/1.1" 200 1135
+INFO:root:number of images in this scenario: 3
+INFO:werkzeug:127.0.0.1 - - [07/Mar/2019 03:20:46] "POST /scenario HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Mar/2019 03:20:46] "GET /static/assets/css/main.css HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Mar/2019 03:20:46] "GET /static/assets/js/annotorious/annotorious.min.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Mar/2019 03:20:46] "GET /static/assets/js/jquery.min.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Mar/2019 03:20:46] "GET /static/assets/js/annotorious/annotorious.css HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Mar/2019 03:20:46] "GET /static/assets/js/anno_utils.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Mar/2019 03:20:46] "GET /static/assets/css/font-awesome.min.css HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Mar/2019 03:20:46] "GET /static/assets/js/browser.min.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Mar/2019 03:20:46] "GET /static/assets/js/breakpoints.min.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Mar/2019 03:20:46] "GET /static/assets/js/util.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Mar/2019 03:20:46] "GET /static/assets/js/main.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Mar/2019 03:20:46] "GET /static/assets/css/images/bg.jpg HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Mar/2019 03:20:46] "GET /static/assets/css/images/overlay.png HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Mar/2019 03:20:46] "GET /static/assets/fonts/fontawesome-webfont.woff2?v=4.7.0 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Mar/2019 03:20:47] "GET /static/assets/js/annotorious/pencil.png HTTP/1.1" 404 -
+INFO:werkzeug:127.0.0.1 - - [07/Mar/2019 03:20:47] "GET /static/assets/js/annotorious/delete.png HTTP/1.1" 404 -
+INFO:werkzeug:127.0.0.1 - - [07/Mar/2019 03:20:47] "GET /static/assets/js/annotorious/feather_icon.png HTTP/1.1" 404 -
+INFO:root:no way: None
+INFO:root:API request form: ImmutableMultiDict([('cur_iter', '1'), ('scenario_name', 'Dog Park'), ('username', 'user3')])
+DEBUG:urllib3.connectionpool:https://vip-ipcrowd.firebaseio.com:443 "GET /scenario_metadata/scenarios.json HTTP/1.1" 200 1135
+INFO:root:number of images in this scenario: 3
+INFO:werkzeug:127.0.0.1 - - [07/Mar/2019 03:20:50] "POST /scenario HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Mar/2019 03:20:50] "GET /static/assets/css/main.css HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Mar/2019 03:20:50] "GET /static/assets/js/annotorious/annotorious.min.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Mar/2019 03:20:51] "GET /static/assets/js/annotorious/annotorious.css HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Mar/2019 03:20:51] "GET /static/assets/js/jquery.min.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Mar/2019 03:20:51] "GET /static/assets/js/anno_utils.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Mar/2019 03:20:51] "GET /static/assets/css/font-awesome.min.css HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Mar/2019 03:20:51] "GET /static/assets/js/browser.min.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Mar/2019 03:20:51] "GET /static/assets/js/breakpoints.min.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Mar/2019 03:20:51] "GET /static/assets/js/util.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Mar/2019 03:20:51] "GET /static/assets/js/main.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Mar/2019 03:20:51] "GET /static/assets/css/images/bg.jpg HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Mar/2019 03:20:51] "GET /static/assets/css/images/overlay.png HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Mar/2019 03:20:51] "GET /static/assets/fonts/fontawesome-webfont.woff2?v=4.7.0 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Mar/2019 03:20:51] "GET /static/assets/js/annotorious/pencil.png HTTP/1.1" 404 -
+INFO:werkzeug:127.0.0.1 - - [07/Mar/2019 03:20:51] "GET /static/assets/js/annotorious/delete.png HTTP/1.1" 404 -
+INFO:werkzeug:127.0.0.1 - - [07/Mar/2019 03:20:51] "GET /static/assets/js/annotorious/feather_icon.png HTTP/1.1" 404 -
+INFO:werkzeug: * Detected change in '/Users/Rahul/Documents/VIP/VIP/main.py', reloading
+INFO:werkzeug: * Restarting with stat
+DEBUG:urllib3.util.retry:Converted retries value: 3 -> Retry(total=3, connect=None, read=None, redirect=None, status=None)
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): vip-ipcrowd.firebaseio.com
+DEBUG:urllib3.connectionpool:https://vip-ipcrowd.firebaseio.com:443 "GET /scenario_metadata/scenarios.json HTTP/1.1" 200 1135
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 268-370-831
+INFO:werkzeug: * Detected change in '/Users/Rahul/Documents/VIP/VIP/main.py', reloading
+INFO:werkzeug: * Restarting with stat
+DEBUG:urllib3.util.retry:Converted retries value: 3 -> Retry(total=3, connect=None, read=None, redirect=None, status=None)
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): vip-ipcrowd.firebaseio.com
+DEBUG:urllib3.connectionpool:https://vip-ipcrowd.firebaseio.com:443 "GET /scenario_metadata/scenarios.json HTTP/1.1" 200 1135
