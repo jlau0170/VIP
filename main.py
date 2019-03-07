@@ -59,8 +59,7 @@ def login():
 def handle_login():
     email, password = request.form['email'], request.form['password']
     try:
-        logged_user = auth.sign_in_with_email_and_password(email, password)
-        id_token = logged_user['idToken']
+        auth.sign_in_with_email_and_password(email, password)
         print(auth.current_user)
     except:
         return render_template('login.html', login_error=True)
@@ -96,8 +95,7 @@ def handle_signup():
     uid = email.split('@')[0]
     logging.info('attempting to create user with email: {} and pass: {}'.format(
     email, password))
-    logged_user = auth.create_user_with_email_and_password(email, password)
-    id_token = logged_user['idToken']
+    auth.create_user_with_email_and_password(email, password)
     logging.info('user name: {}\ncurrent user data: {}'.format(
     user, auth.current_user))
     db.child('users/{}/display_name'.format(uid)).set(user)
