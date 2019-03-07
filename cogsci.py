@@ -36,6 +36,7 @@ class CogSciModule(object):
                 # import pdb; pdb.set_trace()
                 hypo = gen_hypo.split(',')
                 for word in hypo:
+                    word = " " + word + " "
                     if word in self.locations:
                         self.topics['location'] += 1
                     elif word in self.times:
@@ -75,5 +76,5 @@ class CogSciModule(object):
 
 if __name__ == "__main__":
     csm = CogSciModule()
-    xD = csm.updateCurrentAnnotations(['atlanta', 'day', 'hour', 'minute', 'second', 'time', 'now'])
+    xD = csm.updateCurrentAnnotations(['atlanta is the city', 'day is Monday', 'hour is 6', 'minute is 13', 'second', 'time', 'now'])
     print(xD)
