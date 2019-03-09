@@ -16,6 +16,7 @@ config = {
     "storageBucket": "vip-ipcrowd.appspot.com"
 }
 firebase = pyrebase.initialize_app(config)
+print('new firebase object id!: {}'.format(id(firebase)))
 
 auth = firebase.auth()
 db = firebase.database()
