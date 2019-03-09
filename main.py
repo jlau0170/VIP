@@ -22,6 +22,7 @@ db = firebase.database()
 storage = firebase.storage()
 
 def _get_num_imgs(scenario_title):
+    print('firebase id in _get_num_imgs: {}'.format(id(firebase)))
     scenarios = db.child('scenario_metadata/scenarios').get()
     for scenario in scenarios.each():
         if scenario.val()['title'] == scenario_title:
@@ -30,9 +31,11 @@ def _get_num_imgs(scenario_title):
     return -1
 
 def _get_scenario_urls():
+    print('firebase id in _get_scenario_urls: {}'.format(id(firebase)))
     return [(scenario, img_urls[scenario][0]) for scenario in img_urls]
 
 def _build_url_dict():
+    print('firebase id in _build_url_dict: {}'.format(id(firebase)))
     urls = defaultdict(lambda: defaultdict(str))
     scenarios = db.child('scenario_metadata/scenarios').get()
     for scenario in scenarios.each():
@@ -50,6 +53,7 @@ app.logger.setLevel(logging.INFO)
 @app.route('/')
 @app.route('/login', methods=['POST'])
 def login():
+    print('firebase id in login: {}'.format(id(firebase)))
     logging.info('Login page loaded')
     return render_template('login.html', login_error=False)
 
@@ -64,6 +68,7 @@ def handle_login():
     except:
         return render_template('login.html', login_error=True)
     else:
+        print('firebase id in handle_login(): {}'.format(id(firebase)))
         uid = email.split('@')[0]
         user = db.child('users/{}/display_name'.format(uid)).get().val()
         rankings = _get_rankings(user, TOP_N)
@@ -71,6 +76,7 @@ def handle_login():
         points = _get_points(uid)
         scenario_urls = _get_scenario_urls()
         print('handle_login else call current user: {}'.format(auth.current_user))
+        print('id: {}'.format(id(auth)))
         logging.info('logging in user with email: {}'.format(email))
         logging.info('current user data: {}'.format(auth.current_user))
         logging.info('scenario_urls: {}'.format(str(scenario_urls)))
@@ -123,13 +129,16 @@ def go_home():
 @app.route('/signout', methods=['POST'])
 def handle_signout():
     logging.info('trying to sign out')
+    print('firebase id in handle_signout: {}'.format(id(firebase)))
     print('handle_signout else call current user: {}'.format(auth.current_user))
+    print('id: {}'.format(id(auth)))
     auth.current_user = None
     return redirect('/')
 
 
 @app.route('/scenario', methods=['POST'])
 def show_scenario():
+    print('firebase id in show_scenario(): {}'.format(id(firebase)))
     logging.info('API request form: {}'.format(str(request.form)))
     scenario_name = request.form.get('scenario_name', None)
     cur_iter = int(request.form.get('cur_iter', None)) + 1
@@ -144,6 +153,7 @@ def show_scenario():
 
 
 def _get_display_name():
+    print('firebase id in _get_display_name(): {}'.format(id(firebase)))
     email = auth.current_user['email']
     users = db.child('users').get()
     for user in users.each():
@@ -153,6 +163,7 @@ def _get_display_name():
 
 
 def _get_uid():
+    print('firebase id in _get_uid(): {}'.format(id(firebase)))
     logging.info('current user: {}'.format(auth.current_user))
     print('current user: {}'.format(auth.current_user))
     print('id: {}'.format(id(auth)))
@@ -160,6 +171,7 @@ def _get_uid():
 
 
 def _get_rankings(display_name, top_n):
+    print('firebase id in _get_rankings(): {}'.format(id(firebase)))
     rankings = []
     users = db.child('users').get()
     for user in users.each():
@@ -175,6 +187,7 @@ def _get_rankings(display_name, top_n):
 
 
 def _get_points(uid):
+    print('firebase id in _get_points(): {}'.format(id(firebase)))
     return int(db.child('users/{}/points'.format(uid)).get().val())
 
 
