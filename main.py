@@ -101,7 +101,8 @@ def handle_signup():
         scenario_urls=scenario_urls))
     user_data = auth.create_user_with_email_and_password(email, password)
     _store_user_info(
-        uid, display_name=display_name, email=email, points=DEFAULT_PTS)
+        uid, user_data['idToken'], display_name=display_name, email=email,
+        points=DEFAULT_PTS)
     resp.set_cookie('idToken', user_data['idToken'])
     return resp
 
@@ -204,7 +205,7 @@ def _get_num_imgs(scenario_title):
     return -1
 
 
-def _store_user_info(uid, display_name=None, email=None, points=None):
+def _store_user_info(uid, token, display_name=None, email=None, points=None):
     db.child('users/{uid}/display_name'.format(uid=uid)).set(
         display_name, token=id_token)
     db.child('users/{uid}/email'.format(uid=uid)).set(email, token=id_token)
