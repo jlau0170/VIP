@@ -205,7 +205,7 @@ def _get_num_imgs(scenario_title):
     return -1
 
 
-def _store_user_info(uid, token, display_name=None, email=None, points=None):
+def _store_user_info(uid, id_token, display_name=None, email=None, points=None):
     db.child('users/{uid}/display_name'.format(uid=uid)).set(
         display_name, token=id_token)
     db.child('users/{uid}/email'.format(uid=uid)).set(email, token=id_token)
