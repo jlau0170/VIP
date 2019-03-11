@@ -1,90 +1,107 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="style.css">
-    <title>IP Crowd Pnambic Demo</title>
-    <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script>
-    <script>
-      // Initialize Firebase
-      var config = {
-        apiKey: "AIzaSyBEEdVVD1DaQ_bOxhQzXSPdRWrS-goqChc",
-        authDomain: "ipcrowd-a8aea.firebaseapp.com",
-        databaseURL: "https://ipcrowd-a8aea.firebaseio.com",
-        projectId: "ipcrowd-a8aea",
-        storageBucket: "ipcrowd-a8aea.appspot.com",
-        messagingSenderId: "734706257829"
-      };
-      firebase.initializeApp(config);
-    </script>
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-    <script>
-      function signout() {
-        firebase.auth().signOut();
-        console.log(firebase.auth().currentUser);
-        window.location = 'index.html';
-      }
-      function curr_user() {
-        var usr = 'default';
-        firebase.auth().onAuthStateChanged(function(user) {
-          if (user) {
-            console.log(firebase.auth().currentUser.email);
-            usr = firebase.auth().currentUser.email;
-          } else {
-            console.log('no user');
-          }
-        });
-        return usr;
-      }
-    </script>
-    <script type="text/javascript">
-      function loadQuestion(filePath) {
-        var result = null;
-        var xmlhttp = new XMLHttpRequest();
-        xmlhttp.open("GET", filePath, false);
-        xmlhttp.send();
-        if (xmlhttp.status==200) {
-          result = xmlhttp.responseText;
-        }
-        return result;
-      }
+	<head>
+		<title>IP Crowd - Home</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="{{ url_for('static', filename='assets/css/main.css') }}">
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
 
-      function load_points(text) {
-        // var result = null;
-        // var xmlhttp = new XMLHttpRequest();
-        // xmlhttp.open("GET", filePath, false);
-        // xmlhttp.send();
-        // if (xmlhttp.status==200) {
-        //   result = xmlhttp.responseText;
-        // }
-        return 0;
-      }
-    </script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link type="text/css" rel="stylesheet" href="annotorious.css" />
-    <script type="text/javascript" src="annotorious.min.js"></script>
-  </head>
-  <body class="homepage" style="margin:10px;padding:5px" onload="handle_data();">
-    <h2 style="margin:0;padding=0">IP Crowd <small>- </small><small><small>PNAMBIC Demo</small></small></h2><br>
-    <div class="container">
-      <h3>Hello <script>document.write(curr_user())</script>!</h3>
-      <h4>Annotate the Image and Answer the Question!</small></h4>
-      <p>Any neccessary image description or instructions should go here.</p>
-      <h5>Your Total Points: <script src="main.js" type=text/javascript>document.write(get_points())</script></h5><br>
-      <img src="Images/modified/dog-park.jpg" class="annotatable" width=700/><br><br>
-      <h5>Question: <small><script type="text/javascript">document.write(loadQuestion("question.txt"))</script></small></h5>
-      <form>
-        <input type="text" name="response" id="resp" placeholder="Type Answer Here" size=35><br><br>
-        <input id="submit" type="button" value="Download" onclick="store_data(); store_csv();"/>
-        <input id="submitBtn" type="button" value="Submit" onclick="store_annotations(); update_points();"/>
-      </form>
-      <input id="signOut" type="button" value="Sign-Out" onclick="signout();"/>
-    </div>
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <script src="https://requirejs.org/docs/release/2.2.0/minified/require.js"></script>
-    <script src="main.js"></script>
-  </body>
+		<!-- Wrapper-->
+			<div id="wrapper">
+
+				<!-- Nav -->
+					<nav id="nav">
+						<a href="#home" class="icon fa-user"><span>Me</span></a>
+						<a href="#rankings" class="icon fa-trophy"><span>Rankings</span></a>
+						<a href="#scenarios" class="icon fa-folder"><span>Scenarios</span></a>
+						<a href="https://tinyurl.com/y5p5hz7k" class="icon fa-info"><span>More Info</span></a>
+					</nav>
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Me -->
+							<article id="home" class="panel intro">
+								<header>
+									<h1>{{ user }}</h1>
+									<p>{{ points }} points</p>
+								</header>
+								<a href="#work" class="jumplink pic">
+									<span class="arrow icon fa-chevron-right"><span>See my work</span></span>
+									<img src="{{ url_for('static', filename='images/me.jpg') }}" alt="" />
+								</a>
+							</article>
+
+						<!-- Scenarios -->
+							<article id="scenarios" class="panel">
+								<header>
+									<h2 style="text-align:center;">Scenarios</h2>
+									<hr>
+								</header>
+								<div>
+									<form action="{{ url_for('show_scenario') }}" method="post">
+										{% for scenario in scenario_urls %}
+										<h4>{{ scenario[0] }}</h4>
+										<button type="submit" name="scenario_name" value="{{ scenario[0] }}" onclick="">
+											<img src="{{ scenario[1] }}" style="width:20%"/>
+										</button>
+										<hr>
+										{% endfor %}
+										<input type="hidden" name="cur_iter" value="-1" />
+									</form>
+								</div>
+							</article>
+
+						<!-- Rankings -->
+							<article id="rankings" class="panel">
+								<header>
+									<h2 style="text-align:center;">Rankings</h2>
+									<hr>
+								</header>
+								<div>
+									{% for rank in rankings[0:top_n] %}
+									<h4>{{ rank[0] }}) {{ rank[2] }} - {{ rank[1] }}pts</h4>
+									<hr>
+									{% endfor %}
+									{% if rankings|length > top_n %}
+									<h5>.</h5><h5>.</h5><h5>.</h5><hr>
+									<h4>{{ rankings[top_n][0] }}) {{ rankings[top_n][2] }} - {{ rankings[top_n][1] }}pts</h4>
+									<hr>
+									{% endif %}
+								</div>
+							</article>
+					</div>
+
+				<!-- Sign Out -->
+					<br>
+					<div>
+						<form action="{{ url_for('handle_signout') }}" method="post">
+							<button type="submit" value="Sign Out" onclick=""><i class="fa fa-sign-out fa-4x"></i></button>
+						</form>
+					</div>
+			</div>
+
+		<!-- Scripts -->
+			<script src="{{ url_for('static', filename='assets/js/jquery.min.js') }}"></script>
+			<script src="{{ url_for('static', filename='assets/js/browser.min.js') }}"></script>
+			<script src="{{ url_for('static', filename='assets/js/breakpoints.min.js') }}"></script>
+			<script src="{{ url_for('static', filename='assets/js/util.js') }}"></script>
+			<script src="{{ url_for('static', filename='assets/js/main.js') }}"></script>
+			<script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script>
+	    <script>
+	      // Initialize Firebase
+	      var config = {
+	        apiKey: "AIzaSyBEEdVVD1DaQ_bOxhQzXSPdRWrS-goqChc",
+	        authDomain: "ipcrowd-a8aea.firebaseapp.com",
+	        databaseURL: "https://ipcrowd-a8aea.firebaseio.com",
+	        projectId: "ipcrowd-a8aea",
+	        storageBucket: "ipcrowd-a8aea.appspot.com",
+	        messagingSenderId: "734706257829"
+	      };
+	      firebase.initializeApp(config);
+	    </script>
+	</body>
 </html>
