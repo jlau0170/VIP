@@ -8,12 +8,14 @@ class CogSciModule(object):
         self.topics = {
             'location': 0,
             'time': 0,
-            'person': 0
+            'person': 0,
+            'nature': 0
         }
         self.hypothesis = ""
         self.locations = open('Resources/cities15000.txt', encoding='utf-8').read()
         self.times = open('Resources/time.txt', encoding='utf-8').read()
         self.persons = open('Resources/clothes.txt', encoding='utf-8').read()
+        self.nature = open('Resources/nature.txt', encoding='utf-8').read()
         self.toggle = True
         self.counter = random.randint(0, 100)
         self.question = ''
@@ -34,12 +36,15 @@ class CogSciModule(object):
                 # import pdb; pdb.set_trace()
                 hypo = gen_hypo.split(',')
                 for word in hypo:
+                    word = " " + word + " "
                     if word in self.locations:
                         self.topics['location'] += 1
                     elif word in self.times:
                         self.topics['time'] += 1
                     elif word in self.persons:
                         self.topics['person'] += 1
+                    elif word in self.nature:
+                        self.topics['nature'] += 1
         self.maxTopic = max(self.topics.items(), key=operator.itemgetter(1))[0]
         self.toggle = not self.toggle
         if (self.counter % 2 == 0):
@@ -62,7 +67,7 @@ class CogSciModule(object):
             if topic is not self.maxTopic:
                 alternatives.append(topic)
         if len(alternatives) == 0:
-            self.question = "You have focused on location, person, and time. Do you have other aspects you'd like to focus on?"
+            self.question = "You have focused on location, person, time, and nature. Do you have other aspects you'd like to focus on?"
         else:
             newFocus = alternatives[random.randrange(len(alternatives))]
             self.question = "You are focusing on " + self.maxTopic + " too much." + " Do you have any hypothesis regarding " + newFocus
@@ -71,5 +76,5 @@ class CogSciModule(object):
 
 if __name__ == "__main__":
     csm = CogSciModule()
-    xD = csm.updateCurrentAnnotations(['atlanta', 'day', 'hour', 'minute', 'second', 'time', 'now'])
+    xD = csm.updateCurrentAnnotations(['atlanta is the city', 'day is Monday', 'hour is 6', 'minute is 13', 'second', 'time', 'now'])
     print(xD)

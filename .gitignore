@@ -1,10 +1,5 @@
-# Don't track contents of the following
-
-# Folders
-__pycache__/
-
-# Compiled sources
+flask-server.log
+*.pyc
 *.log
-
-# Misc
+__pycache__/
 .DS_Store
