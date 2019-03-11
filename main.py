@@ -16,26 +16,11 @@ config = {
     "storageBucket": "vip-ipcrowd.appspot.com"
 }
 firebase = pyrebase.initialize_app(config)
-print('new firebase object id!: {}'.format(id(firebase)))
 
 auth = firebase.auth()
 db = firebase.database()
 storage = firebase.storage()
 
-
-def _get_scenario_urls():
-    print('firebase id in _get_scenario_urls: {}'.format(id(firebase)))
-    return [(scenario, img_urls[scenario][0]) for scenario in img_urls]
-
-def _build_url_dict():
-    print('firebase id in _build_url_dict: {}'.format(id(firebase)))
-    urls = defaultdict(lambda: defaultdict(str))
-    scenarios = db.child('scenario_metadata/scenarios').get()
-    for scenario in scenarios.each():
-        urls[scenario.val()['title']] = scenario.val()['images']
-    return urls
-
-img_urls = _build_url_dict()
 TOP_N = 3
 DEFAULT_PTS = 0
 
@@ -46,7 +31,6 @@ app.logger.setLevel(logging.INFO)
 @app.route('/')
 @app.route('/login', methods=['POST'])
 def login():
-    print('firebase id in login: {}'.format(id(firebase)))
     logging.info('Login page loaded')
     return render_template('login.html', login_error=False)
 
@@ -61,23 +45,16 @@ def handle_login():
             token=user_data['idToken']).val()
         points = int(db.child('users/{uid}/points'.format(uid=uid)).get(
             token=user_data['idToken']).val())
-        scenario_urls = _get_scenario_urls()
+        scenario_urls = _get_scenario_urls(token=user_data['idToken'])
         rankings = _compute_rankings(display_name=display_name)
     except Exception as e:
-        print('what!??: {}'.format(str(e)))
+        print('Login failed: {}'.format(str(e)))
         return render_template('login.html', login_error=True)
     else:
         resp = make_response(render_template("home.html",
             user=display_name, points=points, rankings=rankings, top_n=TOP_N,
             scenario_urls=scenario_urls))
         resp.set_cookie('idToken', user_data['idToken'])
-        print('idToken at login: {}'.format(user_data['idToken']))
-        print('firebase id in handle_login(): {}'.format(id(firebase)))
-        print('handle_login else call current user: {}'.format(auth.current_user))
-        print('id: {}'.format(id(auth)))
-        logging.info('logging in user with email: {}'.format(email))
-        logging.info('current user data: {}'.format(auth.current_user))
-        logging.info('scenario_urls: {}'.format(str(scenario_urls)))
         return resp
 
 
@@ -95,11 +72,11 @@ def handle_signup():
     email, password = request.form['email'], request.form['password']
     uid = email.split('@')[0]
     rankings = _compute_rankings(display_name=display_name)
-    scenario_urls = _get_scenario_urls()
+    user_data = auth.create_user_with_email_and_password(email, password)
+    scenario_urls = _get_scenario_urls(token=user_data['idToken'])
     resp = make_response(render_template("home.html",
         user=display_name, points=DEFAULT_PTS, rankings=rankings, top_n=TOP_N,
         scenario_urls=scenario_urls))
-    user_data = auth.create_user_with_email_and_password(email, password)
     _store_user_info(
         uid, user_data['idToken'], display_name=display_name, email=email,
         points=DEFAULT_PTS)
@@ -123,18 +100,18 @@ def handle_signout():
     resp = make_response(redirect('/'))
     resp.set_cookie('idToken', '', expires=0)
     auth.current_user = None
-    return redirect('/')
+    return resp
 
 
 @app.route('/scenario', methods=['POST'])
 def show_scenario():
-    print('firebase id in show_scenario(): {}'.format(id(firebase)))
     scenario_name = request.form.get('scenario_name', None)
     cur_iter = int(request.form.get('cur_iter', None)) + 1
     num_imgs = _get_num_imgs(scenario_name)
     uid = _get_uid()
     if cur_iter >= num_imgs:
         return go_home()
+    img_urls = _build_url_dict()
     img_url = img_urls[scenario_name][cur_iter]
     return render_template("scenario.html",
         scenario_name=scenario_name, user=uid, cur_iter=cur_iter,
@@ -155,7 +132,6 @@ def _get_email():
 
 
 def _get_display_name():
-    print('firebase id in _get_display_name(): {}'.format(id(firebase)))
     email = _get_email()
     id_token = _get_id_token()
     users = db.child('users').get(token=id_token)
@@ -171,7 +147,6 @@ def _get_uid():
 
 
 def _compute_rankings(display_name=None):
-    print('firebase id in _compute_rankings(): {}'.format(id(firebase)))
     if not display_name:
         display_name = _get_display_name()
     id_token = _get_id_token()
@@ -189,7 +164,6 @@ def _compute_rankings(display_name=None):
 
 
 def _get_points():
-    print('firebase id in _compute_points(): {}'.format(id(firebase)))
     id_token = _get_id_token()
     uid = _get_uid()
     return int(db.child('users/{uid}/points'.format(uid=uid)).get(
@@ -197,7 +171,6 @@ def _get_points():
 
 
 def _get_num_imgs(scenario_title):
-    print('firebase id in _get_num_imgs: {}'.format(id(firebase)))
     scenarios = db.child('scenario_metadata/scenarios').get()
     for scenario in scenarios.each():
         if scenario.val()['title'] == scenario_title:
@@ -210,6 +183,21 @@ def _store_user_info(uid, id_token, display_name=None, email=None, points=None):
         display_name, token=id_token)
     db.child('users/{uid}/email'.format(uid=uid)).set(email, token=id_token)
     db.child('users/{uid}/points'.format(uid=uid)).set(points, token=id_token)
+
+
+def _build_url_dict(id_token=None):
+    if not id_token:
+        id_token = _get_id_token()
+    urls = defaultdict(lambda: defaultdict(str))
+    scenarios = db.child('scenario_metadata/scenarios').get(token=id_token)
+    for scenario in scenarios.each():
+        urls[scenario.val()['title']] = scenario.val()['images']
+    return urls
+
+
+def _get_scenario_urls(token=None):
+    img_urls = _build_url_dict(id_token=token)
+    return [(scenario, img_urls[scenario][0]) for scenario in img_urls]
 
 
 if __name__ == '__main__':
