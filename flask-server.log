@@ -19853,3 +19853,8 @@ INFO:werkzeug:127.0.0.1 - - [11/Mar/2019 01:53:47] "POST /scenario HTTP/1.1" 200
 INFO:werkzeug:127.0.0.1 - - [11/Mar/2019 01:54:01] "POST /signout HTTP/1.1" 302 -
 INFO:root:Login page loaded
 INFO:werkzeug:127.0.0.1 - - [11/Mar/2019 01:54:01] "GET / HTTP/1.1" 200 -
+DEBUG:urllib3.util.retry:Converted retries value: 3 -> Retry(total=3, connect=None, read=None, redirect=None, status=None)
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): vip-ipcrowd.firebaseio.com
+DEBUG:urllib3.connectionpool:https://vip-ipcrowd.firebaseio.com:443 "GET /scenario_metadata/scenarios.json HTTP/1.1" 200 1109
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 268-370-831
