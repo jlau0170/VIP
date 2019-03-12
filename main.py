@@ -31,8 +31,10 @@ app.logger.setLevel(logging.INFO)
 @app.route('/')
 @app.route('/login', methods=['POST'])
 def login():
+    resp = make_response(render_template('login.html', login_error=False))
+    resp.set_cookie('idToken', '', expires=0)
     logging.info('Login page loaded')
-    return render_template('login.html', login_error=False)
+    return resp
 
 
 @app.route('/home', methods=['POST'])
