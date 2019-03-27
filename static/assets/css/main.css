@@ -1653,7 +1653,20 @@ input, select, textarea {
 	    cursor: pointer;
 	    overflow: hidden;
 	    outline: none;
+        
 	}
+
+.Play {
+    margin-left: 80%;
+    font-size: 1em;
+    border: 1px solid;
+    border-radius: 12%;
+    padding: 0.5em 2em 0.5em 2em;
+}
+
+.Description {
+    float: right;
+}
 
 		input[type="button"]:hover,
 		input[type="submit"]:hover,
