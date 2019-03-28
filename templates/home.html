@@ -5,6 +5,7 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="{{ url_for('static', filename='assets/css/main.css') }}">
+<!--        <link rel="stylesheet" href="../static/assets/css/main.css">-->
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 	</head>
 	<body class="is-preload">
@@ -45,9 +46,13 @@
 									<form action="{{ url_for('show_scenario') }}" method="post">
 										{% for scenario in scenario_urls %}
 										<h4>{{ scenario[0] }}</h4>
-										<button type="submit" name="scenario_name" value="{{ scenario[0] }}" onclick="">
-											<img src="{{ scenario[1] }}" style="width:20%"/>
-										</button>
+                                        <table>
+                                            <tr>
+                                                <td><img class="Scenario-Image" src="{{ scenario[1] }}"/></td>
+                                                <td><p class="Description" >{{ scenario[2] }}</p></td>
+                                            </tr>
+                                        </table>
+										<button class="Play" type="submit" name="scenario_name" value="{{ scenario[0] }}" onclick="">Play</button>
 										<hr>
 										{% endfor %}
 										<input type="hidden" name="cur_iter" value="-1" />

@@ -197,15 +197,17 @@ def _build_url_dict(id_token=None):
     if not id_token:
         id_token = _get_id_token()
     urls = defaultdict(lambda: defaultdict(str))
+    description_urls = defaultdict(lambda: defaultdict(str))
     scenarios = db.child('scenario_metadata/scenarios').get(token=id_token)
     for scenario in scenarios.each():
         urls[scenario.val()['title']] = scenario.val()['images']
-    return urls
+        description_urls[scenario.val()['title']] = scenario.val()['description']
+    return urls, description_urls
 
 
 def _get_scenario_urls(token=None):
-    img_urls = _build_url_dict(id_token=token)
-    return [(scenario, img_urls[scenario][0]) for scenario in img_urls]
+    img_urls, desc_urls = _build_url_dict(id_token=token)
+    return [(scenario, img_urls[scenario][0], desc_urls[scenario]) for scenario in img_urls]
 
 
 if __name__ == '__main__':
