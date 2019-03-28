@@ -118,7 +118,7 @@ def show_scenario():
         return go_home()
     print('~time started!~')
     start_time = time.time()
-    img_urls = _build_url_dict()
+    img_urls, desc_urls = _build_url_dict()
     print('_build_url_dict time:  {}'.format(str(time.time() - start_time)))
     img_url = img_urls[scenario_name][cur_iter]
     return render_template("scenario.html",
