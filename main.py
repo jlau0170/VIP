@@ -6,6 +6,7 @@ import logging
 import pyrebase
 import requests
 import sys
+import time
 
 logging.basicConfig(filename='flask-server.log', level=logging.DEBUG)
 
@@ -31,6 +32,7 @@ app.logger.setLevel(logging.INFO)
 @app.route('/')
 @app.route('/login', methods=['POST'])
 def login():
+    print('here1')
     resp = make_response(render_template('login.html', login_error=False))
     resp.set_cookie('idToken', '', expires=0)
     logging.info('Login page loaded')
@@ -39,6 +41,7 @@ def login():
 
 @app.route('/home', methods=['POST'])
 def handle_login():
+    print('here2')
     try:
         email, password = request.form['email'], request.form['password']
         uid = email.split('@')[0]
@@ -113,7 +116,10 @@ def show_scenario():
     uid = _get_uid()
     if cur_iter >= num_imgs:
         return go_home()
+    print('~time started!~')
+    start_time = time.time()
     img_urls = _build_url_dict()
+    print('_build_url_dict time:  {}'.format(str(time.time() - start_time)))
     img_url = img_urls[scenario_name][cur_iter]
     return render_template("scenario.html",
         scenario_name=scenario_name, user=uid, cur_iter=cur_iter,
