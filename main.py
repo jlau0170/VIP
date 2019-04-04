@@ -112,11 +112,13 @@ def handle_signout():
 def show_scenario():
     scenario_name = request.form.get('scenario_name', None)
     cur_iter = int(request.form.get('cur_iter', None)) + 1
+    hypothesis = request.form.get('hypothesis', None)
     num_imgs = _get_num_imgs(scenario_name)
     uid = _get_uid()
+    if hypothesis:
+        _store_img_hypothesis(scenario_name, cur_iter)
     if cur_iter >= num_imgs:
         return go_home()
-    print('~time started!~')
     start_time = time.time()
     img_urls, desc_urls, prompt_urls = _build_url_dict()
     print('_build_url_dict time:  {}'.format(str(time.time() - start_time)))
@@ -192,6 +194,14 @@ def _store_user_info(uid, id_token, display_name=None, email=None, points=None):
         display_name, token=id_token)
     db.child('users/{uid}/email'.format(uid=uid)).set(email, token=id_token)
     db.child('users/{uid}/points'.format(uid=uid)).set(points, token=id_token)
+
+
+def _store_img_hypothesis(scenario_title, cur_iter):
+    db.child('users/{uid}/hypothesis/scenarios/{scenario_title}/{img}'.format(
+        uid=_get_uid(),
+        scenario_title=scenario_title,
+        img=cur_iter
+    ))
 
 
 def _build_url_dict(id_token=None):
