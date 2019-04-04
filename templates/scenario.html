@@ -44,6 +44,7 @@
 		<div id="wrapper">
       <form id="myform" name="myform" action="{{ url_for('show_scenario') }}" method="post">
 				<h4>{{ bias }}</h4>
+				<p>{{ prompt }}</p>
 				<br>
         <img src="{{ img_url }}" class=annotatable width="600" style="border-width:3px;border-style:solid;border-color:#000000;"></img>
 				<input type="hidden" name="cur_iter" value="{{ cur_iter }}" />

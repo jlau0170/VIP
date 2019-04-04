@@ -118,12 +118,13 @@ def show_scenario():
         return go_home()
     print('~time started!~')
     start_time = time.time()
-    img_urls, desc_urls = _build_url_dict()
+    img_urls, desc_urls, prompt_urls = _build_url_dict()
     print('_build_url_dict time:  {}'.format(str(time.time() - start_time)))
     img_url = img_urls[scenario_name][cur_iter]
+    prompt_url = prompt_urls[scenario_name][cur_iter]
     return render_template("scenario.html",
         scenario_name=scenario_name, user=uid, cur_iter=cur_iter,
-        img_url=img_url, bias='temporary bias')
+        img_url=img_url, bias='temporary bias', prompt=prompt_url)
 
 
 def _get_id_token():
@@ -198,15 +199,17 @@ def _build_url_dict(id_token=None):
         id_token = _get_id_token()
     urls = defaultdict(lambda: defaultdict(str))
     description_urls = defaultdict(lambda: defaultdict(str))
+    prompt_urls = defaultdict(lambda: defaultdict(str))
     scenarios = db.child('scenario_metadata/scenarios').get(token=id_token)
     for scenario in scenarios.each():
         urls[scenario.val()['title']] = scenario.val()['images']
         description_urls[scenario.val()['title']] = scenario.val()['description']
-    return urls, description_urls
+        prompt_urls[scenario.val()['title']] = scenario.val()['prompts']
+    return urls, description_urls, prompt_urls
 
 
 def _get_scenario_urls(token=None):
-    img_urls, desc_urls = _build_url_dict(id_token=token)
+    img_urls, desc_urls, prompt_urls = _build_url_dict(id_token=token)
     return [(scenario, img_urls[scenario][0], desc_urls[scenario]) for scenario in img_urls]
 
 
