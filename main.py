@@ -115,8 +115,8 @@ def show_scenario():
     hypothesis = request.form.get('hypothesis', None)
     num_imgs = _get_num_imgs(scenario_name)
     uid = _get_uid()
-    if hypothesis:
-        _store_img_hypothesis(scenario_name, cur_iter)
+    # if hypothesis:
+    #     _store_img_hypothesis(hypothesis, scenario_name, cur_iter)
     if cur_iter >= num_imgs:
         return go_home()
     start_time = time.time()
@@ -196,12 +196,13 @@ def _store_user_info(uid, id_token, display_name=None, email=None, points=None):
     db.child('users/{uid}/points'.format(uid=uid)).set(points, token=id_token)
 
 
-def _store_img_hypothesis(scenario_title, cur_iter):
+def _store_img_hypothesis(hypothesis, scenario_title, cur_iter):
+    id_token = _get_id_token()
     db.child('users/{uid}/hypothesis/scenarios/{scenario_title}/{img}'.format(
         uid=_get_uid(),
         scenario_title=scenario_title,
-        img=cur_iter
-    ))
+        img=str(int(cur_iter)-1)
+    )).set(hypothesis, token=id_token)
 
 
 def _build_url_dict(id_token=None):
@@ -211,6 +212,7 @@ def _build_url_dict(id_token=None):
     description_urls = defaultdict(lambda: defaultdict(str))
     prompt_urls = defaultdict(lambda: defaultdict(str))
     scenarios = db.child('scenario_metadata/scenarios').get(token=id_token)
+    print(scenarios)
     for scenario in scenarios.each():
         urls[scenario.val()['title']] = scenario.val()['images']
         description_urls[scenario.val()['title']] = scenario.val()['description']

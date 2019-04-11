@@ -43,12 +43,12 @@
 	<body onload="handle_data();" class="is-preload">
 		<div id="wrapper">
       <form id="myform" name="myform" action="{{ url_for('show_scenario') }}" method="post">
-				<!-- <h4>{{ bias }}</h4> -->
+				<h2>{{ scenario_name }}</h2>
+				<br>
 				<p>{{ prompt }}</p>
-				<br>
 				<p><b>Please annotate the image regarding any relevent evidence!</b></p>
-				<br>
 				<input id="hypothesis" type="text" name="hypothesis" placeholder="Enter hypothesis" />
+				<br><br><br>
         <img src="{{ img_url }}" class=annotatable width="800" style="border-width:3px;border-style:solid;border-color:#000000;"></img>
 				<input type="hidden" name="cur_iter" value="{{ cur_iter }}" />
 				<input type="hidden" name="scenario_name" value="{{ scenario_name }}" />
