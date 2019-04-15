@@ -32,7 +32,6 @@ app.logger.setLevel(logging.INFO)
 @app.route('/')
 @app.route('/login', methods=['POST'])
 def login():
-    print('here1')
     resp = make_response(render_template('login.html', login_error=False))
     resp.set_cookie('idToken', '', expires=0)
     logging.info('Login page loaded')
@@ -41,7 +40,6 @@ def login():
 
 @app.route('/home', methods=['POST'])
 def handle_login():
-    print('here2')
     try:
         email, password = request.form['email'], request.form['password']
         uid = email.split('@')[0]
@@ -75,6 +73,8 @@ def handle_signup():
         return redirect('/')
     display_name = '{} {}'.format(request.form['first'], request.form['last'])
     email, password = request.form['email'], request.form['password']
+    if '@' not in email or len(password) < 6:
+        return render_template('signup.html', signup_error=True)
     uid = email.split('@')[0]
     rankings = _compute_rankings(display_name=display_name)
     user_data = auth.create_user_with_email_and_password(email, password)
@@ -201,7 +201,6 @@ def _store_user_info(uid, id_token, display_name=None, email=None, points=None):
 
 
 def _store_img_hypothesis(hypothesis, scenario_title, cur_iter):
-    print('in here')
     id_token = _get_id_token()
     db.child('users/{uid}/hypothesis/scenarios/{scenario_title}/{img}'.format(
         uid=_get_uid(),
