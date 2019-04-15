@@ -113,10 +113,13 @@ def show_scenario():
     scenario_name = request.form.get('scenario_name', None)
     cur_iter = int(request.form.get('cur_iter', None)) + 1
     hypothesis = request.form.get('hypothesis', None)
+    cur_comments = request.form.get('comments', None)
     num_imgs = _get_num_imgs(scenario_name)
     uid = _get_uid()
     # if hypothesis:
     #     _store_img_hypothesis(hypothesis, scenario_name, cur_iter)
+    if not cur_comments:
+        cur_comments = ''
     if cur_iter >= num_imgs:
         return go_home()
     start_time = time.time()
@@ -126,7 +129,8 @@ def show_scenario():
     prompt_url = prompt_urls[scenario_name][cur_iter]
     return render_template("scenario.html",
         scenario_name=scenario_name, user=uid, cur_iter=cur_iter,
-        img_url=img_url, bias='temporary bias', prompt=prompt_url)
+        img_url=img_url, bias='temporary bias', prompt=prompt_url,
+        comments=cur_comments)
 
 
 def _get_id_token():
@@ -197,6 +201,7 @@ def _store_user_info(uid, id_token, display_name=None, email=None, points=None):
 
 
 def _store_img_hypothesis(hypothesis, scenario_title, cur_iter):
+    print('in here')
     id_token = _get_id_token()
     db.child('users/{uid}/hypothesis/scenarios/{scenario_title}/{img}'.format(
         uid=_get_uid(),

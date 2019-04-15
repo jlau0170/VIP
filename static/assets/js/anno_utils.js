@@ -11,6 +11,13 @@ function generate_id() {
   return id;
 }
 
+function update_points(username, annotations_map) {
+  firebase.database().ref('users/' + username + '/points').once('value', function(data) {
+    firebase.database().ref('users/' + username + '/points').set(data.val() + (10 * Object.keys(annotations_map).length));
+    console.log(data.val());
+  })
+}
+
 function store_annotations() {
   console.log('storing annotations');
   console.log(annotations_map);
@@ -19,6 +26,7 @@ function store_annotations() {
   for (var key in annotations_map) {
     firebase.database().ref('users/' + username + '/annotations/' + key).set(annotations_map[key]);
   }
+  update_points(username, annotations_map);
   setTimeout(function(){
     console.log('received response from firebase');
     document.forms['myform'].submit();

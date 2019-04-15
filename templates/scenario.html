@@ -46,15 +46,21 @@
 				<h2>{{ scenario_name }}</h2>
 				<br>
 				<p>{{ prompt }}</p>
-				<p><b>Please annotate the image regarding any relevent evidence!</b></p>
 				<input id="hypothesis" type="text" name="hypothesis" placeholder="Enter hypothesis" />
 				<br><br><br>
+				<p><b>Please annotate the image regarding any relevent evidence!</b></p>
         <img src="{{ img_url }}" class=annotatable width="800" style="border-width:3px;border-style:solid;border-color:#000000;"></img>
 				<input type="hidden" name="cur_iter" value="{{ cur_iter }}" />
 				<input type="hidden" name="scenario_name" value="{{ scenario_name }}" />
 				<input type="hidden" id="username" name="username" value="{{ user }}" />
-        <button id="next_pic" type="button" value="Next" onclick="store_annotations();"><i class="fa fa-arrow-circle-right fa-4x"></i></button>
-      </form>
+				<br><br>
+				<h4>Notes & Comments</h4>
+				<br>
+				<!-- <input id="comments" type="text" name="comments" value="{{ comments }}" style="height:200px"/> -->
+				<textarea id="comments" name="comments" rows="10">{{ comments }}</textarea>
+				<br><br>
+				<button id="next_pic" type="button" value="Next" onclick="store_annotations();"><i class="fa fa-arrow-circle-right fa-4x"></i></button>
+			</form>
     </div>
 		<!-- Scripts -->
 		<script src="{{ url_for('static', filename='assets/js/jquery.min.js') }}"></script>
