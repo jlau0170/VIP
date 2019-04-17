@@ -45,6 +45,7 @@
       <form id="myform" name="myform" action="{{ url_for('show_scenario') }}" method="post">
 				<h2>{{ scenario_name }}</h2>
 				<br>
+				<p><b>Your total points: {{ total_points }}</b></p>
 				<p>{{ prompt }}</p>
 				<input id="hypothesis" type="text" name="hypothesis" placeholder="Enter hypothesis" />
 				<br><br><br>

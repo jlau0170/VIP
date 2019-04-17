@@ -115,6 +115,7 @@ def show_scenario():
     hypothesis = request.form.get('hypothesis', None)
     cur_comments = request.form.get('comments', None)
     num_imgs = _get_num_imgs(scenario_name)
+    total_points = _get_points()
     uid = _get_uid()
     # if hypothesis:
     #     _store_img_hypothesis(hypothesis, scenario_name, cur_iter)
@@ -130,7 +131,7 @@ def show_scenario():
     return render_template("scenario.html",
         scenario_name=scenario_name, user=uid, cur_iter=cur_iter,
         img_url=img_url, bias='temporary bias', prompt=prompt_url,
-        comments=cur_comments)
+        comments=cur_comments, total_points=total_points)
 
 
 def _get_id_token():
