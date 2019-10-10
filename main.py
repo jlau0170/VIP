@@ -18,6 +18,9 @@ config = {
 }
 firebase = pyrebase.initialize_app(config)
 
+#Website: http://127.0.0.1:5000/
+
+
 auth = firebase.auth()
 db = firebase.database()
 storage = firebase.storage()
@@ -119,8 +122,19 @@ def show_scenario():
     uid = _get_uid()
     # if hypothesis:
     #     _store_img_hypothesis(hypothesis, scenario_name, cur_iter)
+    if not hypothesis:
+        hypothesis = ' '
     if not cur_comments:
-        cur_comments = ''
+        cur_comments = ' '
+
+
+    if cur_iter != 0:
+        print('calling _store_scenario_data with:', 'hypothesis:',
+         hypothesis, "cur_comments:", cur_comments, "scenario_name:", scenario_name,
+         "cur_iter", cur_iter)
+
+        _store_scenario_data(hypothesis, cur_comments, scenario_name, cur_iter)
+
     if cur_iter >= num_imgs:
         return go_home()
     start_time = time.time()
@@ -131,7 +145,7 @@ def show_scenario():
     return render_template("scenario.html",
         scenario_name=scenario_name, user=uid, cur_iter=cur_iter,
         img_url=img_url, bias='temporary bias', prompt=prompt_url,
-        comments=cur_comments, total_points=total_points)
+        comments=cur_comments, total_points=total_points, isGTq=True)
 
 
 def _get_id_token():
@@ -209,6 +223,38 @@ def _store_img_hypothesis(hypothesis, scenario_title, cur_iter):
         img=str(int(cur_iter)-1)
     )).set(hypothesis, token=id_token)
 
+def _store_scenario_data(hypothesis, comments, scenario_title, cur_iter):
+    id_token = _get_id_token()
+
+    hypo_path = 'users/{uid}/scenario_data/{scenario_title}/hypothesis/{img}'.format(
+        uid=_get_uid(),
+        scenario_title=scenario_title,
+        img=str(int(cur_iter)-1))
+    print('hypothesis path for', scenario_title, hypo_path)
+    db.child(hypo_path).set(hypothesis, token=id_token) 
+
+
+    comments_path = 'users/{uid}/scenario_data/{scenario_title}/hypothesis/{img}'.format(
+        uid=_get_uid(),
+        scenario_title=scenario_title,
+        img=str(int(cur_iter)-1))
+    db.child(comments_path).set(comments, token=id_token) 
+
+    # db.child('users').child(uid).child('scenario_data').child(scenario_title) \
+    #         .child('hypothesis').child(img).set(hypothesis, token=id_token)
+
+    # db.child('users/{uid}/scenario_data/{scenario_title}/hypothesis/{img}'.format(
+    #     uid=_get_uid(),
+    #     scenario_title=scenario_title,
+    #     img=str(int(cur_iter)-1)
+    # )).set(hypothesis, token=id_token)
+
+    # db.child('users/{uid}/scenario_data/{scenario_title}/comments/{img}'.format(
+    #     uid=_get_uid(),
+    #     scenario_title=scenario_title,
+    #     img=str(int(cur_iter)-1)
+    # )).set(comments, token=id_token)
+
 
 def _build_url_dict(id_token=None):
     if not id_token:
@@ -217,11 +263,16 @@ def _build_url_dict(id_token=None):
     description_urls = defaultdict(lambda: defaultdict(str))
     prompt_urls = defaultdict(lambda: defaultdict(str))
     scenarios = db.child('scenario_metadata/scenarios').get(token=id_token)
-    print(scenarios)
+
+    print('loading scenarios')
     for scenario in scenarios.each():
+        print("scenario:", scenario.val()['title'], "------------------------------------")
         urls[scenario.val()['title']] = scenario.val()['images']
         description_urls[scenario.val()['title']] = scenario.val()['description']
         prompt_urls[scenario.val()['title']] = scenario.val()['prompts']
+        # print("urls:", urls)
+        # print("description_urls", description_urls)
+        # print("prompt_urls", prompt_urls)
     return urls, description_urls, prompt_urls
 
 

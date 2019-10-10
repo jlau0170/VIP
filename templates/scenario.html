@@ -42,32 +42,46 @@
 	</head>
 	<body onload="handle_data();" class="is-preload">
 		<div id="wrapper">
-      <form id="myform" name="myform" action="{{ url_for('show_scenario') }}" method="post">
-				<h2>{{ scenario_name }}</h2>
-				<br>
-				<p><b>Your total points: {{ total_points }}</b></p>
-				<p>{{ prompt }}</p>
-				<input id="hypothesis" type="text" name="hypothesis" placeholder="Enter hypothesis" />
-				<br><br><br>
-				<p><b>Please annotate the image regarding any relevent evidence!</b></p>
-        <img src="{{ img_url }}" class=annotatable width="800" style="border-width:3px;border-style:solid;border-color:#000000;"></img>
-				<input type="hidden" name="cur_iter" value="{{ cur_iter }}" />
-				<input type="hidden" name="scenario_name" value="{{ scenario_name }}" />
-				<input type="hidden" id="username" name="username" value="{{ user }}" />
-				<br><br>
-				<h4>Notes & Comments</h4>
-				<br>
-				<!-- <input id="comments" type="text" name="comments" value="{{ comments }}" style="height:200px"/> -->
-				<textarea id="comments" name="comments" rows="10">{{ comments }}</textarea>
-				<br><br>
-				<button id="next_pic" type="button" value="Next" onclick="store_annotations();"><i class="fa fa-arrow-circle-right fa-4x"></i></button>
-			</form>
-    </div>
-		<!-- Scripts -->
-		<script src="{{ url_for('static', filename='assets/js/jquery.min.js') }}"></script>
-		<script src="{{ url_for('static', filename='assets/js/browser.min.js') }}"></script>
-		<script src="{{ url_for('static', filename='assets/js/breakpoints.min.js') }}"></script>
-		<script src="{{ url_for('static', filename='assets/js/util.js') }}"></script>
-		<script src="{{ url_for('static', filename='assets/js/main.js') }}"></script>
+	      <form id="myform" name="myform" action="{{ url_for('show_scenario') }}" method="post">
+					<h2>{{ scenario_name }}</h2>
+					<br>
+					<p><b>Your total points: {{ total_points }}</b></p>
+					<p><b>{{ prompt }}</b></p>
+					
+					{% if isGTq %}
+					<input id="hypothesis" type="text" name="hypothesis" placeholder="Enter Locations" />
+					<br><br><br>
+					<p><b>Please annotate the image regarding other locations on campus!</b></p>
+
+					{% else %}
+					<input id="hypothesis" type="text" name="hypothesis" placeholder="Enter hypothesis" />
+					<br><br><br>
+					<p><b>Please annotate the image regarding any relevent evidence!</b></p>
+					{% endif %}
+
+	        <img src="{{ img_url }}" class=annotatable width="800" style="border-width:3px;border-style:solid;border-color:#000000;"></img>
+					<input type="hidden" name="cur_iter" value="{{ cur_iter }}" />
+					<input type="hidden" name="scenario_name" value="{{ scenario_name }}" />
+					<input type="hidden" id="username" name="username" value="{{ user }}" />
+					<br><br>
+
+					{% if isGTq %}
+					<p><b>Provide some suggestions as to how Georgia Tech can fix the areas you highlighted above</b></p>
+					{% else %}
+					<h4>Notes & Comments</h4>
+					<br>
+					{% endif %}
+					<!-- <input id="comments" type="text" name="comments" value="{{ comments }}" style="height:200px"/> -->
+					<textarea id="comments" name="comments" rows="5">{{ comments }}</textarea>
+					<br><br>
+					<button id="next_pic" type="button" value="Next" onclick="store_annotations();"><i class="fa fa-arrow-circle-right fa-4x"></i></button>
+				</form>
+	    </div>
+			<!-- Scripts -->
+			<script src="{{ url_for('static', filename='assets/js/jquery.min.js') }}"></script>
+			<script src="{{ url_for('static', filename='assets/js/browser.min.js') }}"></script>
+			<script src="{{ url_for('static', filename='assets/js/breakpoints.min.js') }}"></script>
+			<script src="{{ url_for('static', filename='assets/js/util.js') }}"></script>
+			<script src="{{ url_for('static', filename='assets/js/main.js') }}"></script>
 	</body>
 </html>

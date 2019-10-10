@@ -8,6 +8,18 @@
 <!--        <link rel="stylesheet" href="../static/assets/css/main.css">-->
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 	</head>
+
+	<style>
+		.newspaper {
+		  /* Standard syntax */
+		  column-count: 2;
+		  column-gap: 40px;
+		  column-rule-style: solid;
+		  column-rule-width: 1px;
+		  column-rule-color: lightblue;
+		}
+	</style>
+
 	<body class="is-preload">
 
 		<!-- Wrapper-->
@@ -18,7 +30,7 @@
 						<a href="#home" class="icon fa-user"><span>Me</span></a>
 						<a href="#rankings" class="icon fa-trophy"><span>Rankings</span></a>
 						<a href="#scenarios" class="icon fa-folder"><span>Scenarios</span></a>
-						<a href="https://tinyurl.com/y5p5hz7k" class="icon fa-info"><span>More Info</span></a>
+						<a href="#dataAnalytics" class="icon fa-info"><span>Analytics</span></a>
 					</nav>
 
 				<!-- Main -->
@@ -48,7 +60,9 @@
 										<h4>{{ scenario[0] }}</h4>
                                         <table>
                                             <tr>
+                                            	<!--
                                                 <td><img class="Scenario-Image" src="{{ scenario[1] }}"/></td>
+                                                -->
                                                 <td><p class="Description" >{{ scenario[2] }}</p></td>
                                             </tr>
                                         </table>
@@ -78,6 +92,51 @@
 									{% endif %}
 								</div>
 							</article>
+
+
+							<!-- Data Analytics -->
+							<article id="dataAnalytics" class="panel">
+								<header>
+									<h2 style="text-align:center;">Data Analytics</h2>
+									<br>
+									<h3 style="text-align:center;">Georgia Tech Disability Services</h1>
+									<hr>
+								</header>
+								<div>
+									<h5>Locations:</h5>
+										<div style="float: left; width: 50%;">
+											<ul>
+											<li>CODA</li>
+											<li>Klaus</li>
+											<li>Student Center elevator</li>
+											</ul>
+										</div>
+										<div style="float: right; width: 50%;">
+										<ul>
+											<li>Love MRDC</li>
+											<li>Freshman Hill</li>
+											<li>MRDC</li>
+											</ul>
+										</div>
+									<h5>Solutions:</h5>
+										<div style="float: left; width: 50%;">
+											<ul>
+											<li>Elevators</li>
+											<li>Elevator access</li>
+											<li>Routes</li>
+											</ul>
+										</div>
+										<div style="float: right; width: 50%;">
+										<ul>
+											<li>Drivers</li>
+											<li>Buses</li>
+											<li>Golf Carts</li>
+											</ul>
+										</div>
+								</div>
+							</article>
+
+
 					</div>
 
 				<!-- Sign Out -->
