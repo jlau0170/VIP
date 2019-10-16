@@ -135,6 +135,14 @@ def show_scenario():
 
         _store_scenario_data(hypothesis, cur_comments, scenario_name, cur_iter)
 
+    html_page = "scenario.html"
+    if scenario_name == "Upload Image yo title":
+        html_page = "upload_image_scenario.html"
+
+    isGTq = False
+    if scenario_name == "Georgia Tech Disability Services":
+        isGTq = True
+
     if cur_iter >= num_imgs:
         return go_home()
     start_time = time.time()
@@ -142,10 +150,10 @@ def show_scenario():
     print('_build_url_dict time:  {}'.format(str(time.time() - start_time)))
     img_url = img_urls[scenario_name][cur_iter]
     prompt_url = prompt_urls[scenario_name][cur_iter]
-    return render_template("scenario.html",
+    return render_template(html_page,
         scenario_name=scenario_name, user=uid, cur_iter=cur_iter,
         img_url=img_url, bias='temporary bias', prompt=prompt_url,
-        comments=cur_comments, total_points=total_points, isGTq=True)
+        comments=cur_comments, total_points=total_points, isGTq=isGTq)
 
 
 def _get_id_token():

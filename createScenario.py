@@ -48,6 +48,27 @@ data = {
 	"title": title
 }
 
-print("uploading scenario:", title)
-db.child("scenario_metadata").child("scenarios").child("scenario0").set(data)
-print("finished uploading scenario:", title)
+# --- Download current scenarios to scenario_data
+# scenario_data = db.child("scenario_metadata").get().val()
+
+
+# --- Store scenario data into scenario_data.json
+# with open('scenario_data.json', 'w') as fp: 
+# 	json.dump(scenario_data, fp, sort_keys=True, indent=4)
+
+
+# --- Read scenario data from scenario_data.json
+
+scenario_data = {}
+with open('scenario_data.json', 'r') as fp2: 
+    scenario_data = json.load(fp2)
+
+# print(data2)
+
+
+# --- Upload data
+
+
+print("uploading scenario data")
+db.child("scenario_metadata").set(scenario_data)
+print("finished scenario data")

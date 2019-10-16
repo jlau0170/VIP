@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>IP Crowd - Upload Image</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="{{ url_for('static', filename='assets/css/main.css') }}">
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='assets/js/annotorious/annotorious.css') }}"/>
+    <script type="text/javascript" src="{{ url_for('static', filename='assets/js/annotorious/annotorious.min.js') }}"></script>
+		<script type="javascript">
+			function testing()
+			{
+			    var newState = -1;
+
+			    setTimeout(function() {
+			       if (newState == -1) {
+			          alert('VIDEO HAS STOPPED');
+			          output = "newText";
+			          console.log("AFTER 5 Sec: " + output);
+			          document.getElementById("myForm").submit();
+			          return false;
+			       }
+			   }, 5000);
+			   //return false;
+			}
+		</script>
+		<script src="{{ url_for('static', filename='assets/js/firebase.js') }}"></script>
+		<script>
+			// Initialize Firebase
+			var config = {
+				apiKey: "AIzaSyC6ce12c32OpCI7-u5ueRbfYhsw_fBnkwk",
+				authDomain: "vip-ipcrowd.firebaseapp.com",
+				databaseURL: "https://vip-ipcrowd.firebaseio.com",
+				projectId: "vip-ipcrowd",
+				storageBucket: "vip-ipcrowd.appspot.com",
+				messagingSenderId: "80658497046"
+			};
+			firebase.initializeApp(config);
+		</script>
+		<script src="{{ url_for('static', filename='assets/js/anno_utils.js') }}"></script>
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body onload="handle_data();" class="is-preload">
+		<div id="wrapper">
+	      <form id="myform" name="myform" action="{{ url_for('show_scenario') }}" method="post">
+					<h2>{{ scenario_name }}</h2>
+					<br>
+					<p><b>Your total points: {{ total_points }}</b></p>
+					<br><br><br>
+
+					<p><b>{{ prompt }}</b></p>
+					
+
+					
+					
+
+					<input id="hypothesis" type="text" name="hypothesis" placeholder="Enter Description of Image" />
+					<br><br><br>
+
+					<input type="hidden" name="cur_iter" value="{{ cur_iter }}" />
+					<input type="hidden" name="scenario_name" value="{{ scenario_name }}" />
+					<input type="hidden" id="username" name="username" value="{{ user }}" />
+					<br><br>
+
+					<!-- <input id="comments" type="text" name="comments" value="{{ comments }}" style="height:200px"/> -->
+					<input type="hidden" id="comments" name="comments" value="{{ comments }}" />
+					<br><br>
+					<button id="next_pic" type="button" value="Next" onclick="store_annotations();"><i class="fa fa-arrow-circle-right fa-4x"></i></button>
+				</form>
+	    </div>
+			<!-- Scripts -->
+			<script src="{{ url_for('static', filename='assets/js/jquery.min.js') }}"></script>
+			<script src="{{ url_for('static', filename='assets/js/browser.min.js') }}"></script>
+			<script src="{{ url_for('static', filename='assets/js/breakpoints.min.js') }}"></script>
+			<script src="{{ url_for('static', filename='assets/js/util.js') }}"></script>
+			<script src="{{ url_for('static', filename='assets/js/main.js') }}"></script>
+	</body>
+</html>

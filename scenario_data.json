@@ -1,0 +1,62 @@
+{
+    "scenarios": {
+        "scenario0": {
+            "author": "abdullah",
+            "description": "Georgia Tech would like to make changes to the physical layout\nof the campus in order to facilitate an easier campus for those\nin need. Georgia Tech needs help in identifying places on campus that\nneed physical changes. Help them identify and pinpoint specific places that\ncould benefit from these changes.",
+            "images": [
+                "https://firebasestorage.googleapis.com/v0/b/vip-ipcrowd.appspot.com/o/images%2Fscenario0%2F00-01.jpg?alt=media&token=4e54c5fc-8b11-4253-bde5-e0ebdff9d75e"
+            ],
+            "prompts": [
+                "Georgia Tech would like to make changes to the physical layout\nof the Georgia Tech campus in order to facilitate an easier campus for those\nin need. Georgia Tech needs help in identifying places on campus that\nneed physical changes. Which places on campus require changes? Enter the \nname of a building/walkway/etc in the text box below and annotate the image\nbelow for larger areas."
+            ],
+            "title": "Georgia Tech Disability Services"
+        },
+        "scenario1": {
+            "author": "abdullah",
+            "description": "Upload image yo description",
+            "images": [
+                "https://firebasestorage.googleapis.com/v0/b/vip-ipcrowd.appspot.com/o/images%2Fscenario0%2F00-01.jpg?alt=media&token=4e54c5fc-8b11-4253-bde5-e0ebdff9d75e"
+            ],
+            "prompts": [
+                "upload image yo prompt"
+            ],
+            "title": "Upload Image yo title"
+        },
+        "scenario2": {
+            "author": "hayley",
+            "description": "Sarah has received lots of texts from an unknown number recently. Help her figure out who is stalking her!",
+            "images": [
+                "https://firebasestorage.googleapis.com/v0/b/vip-ipcrowd.appspot.com/o/images%2Fscenario1%2F01-01.jpg?alt=media&token=53be4250-c4a5-4004-9152-d1ca589322fa",
+                "https://firebasestorage.googleapis.com/v0/b/vip-ipcrowd.appspot.com/o/images%2Fscenario1%2F01_02.jpg?alt=media&token=7d9dacc1-fef7-4b00-9655-b60128a0d6d6",
+                "https://firebasestorage.googleapis.com/v0/b/vip-ipcrowd.appspot.com/o/images%2Fscenario1%2F01-03.jpg?alt=media&token=5f1b9fb1-df15-42c5-afc0-2fb15ee56827",
+                "https://firebasestorage.googleapis.com/v0/b/vip-ipcrowd.appspot.com/o/images%2Fscenario1%2F01-04.jpg?alt=media&token=7596e27f-2b92-4f19-9036-75b3c68698b4"
+            ],
+            "prompts": [
+                "Sarah has received lots of texts from an unknown number recently. Based on the pictures below, answer these questions and annotate the picture to support your hypothesis:  When and where is the event happening? Characteristics of the anonymous message sender? (e.g. age, gender, ethnicity, academic background)  Why is the person texting the girl? What\u2019s your current hypothesis about who\u2019s the anonymous messenger?",
+                "One day she was talking to Girl B and Girl C, Girl B said \u201cMaybe someone has a crush on you and is planning a surprise.\u201d  Girl C disagreed on that, \u201cThis is creepy! Seems like someone\u2019s stalking you.\u201d Girl B then said \u201cDon\u2019t be paranoid. Maybe it\u2019s the TA who likes you!\u201d \u201cI wish it\u2019s not a nerd like the TA.\u201d said Sarah.  Around what time was this photo taken? (e.g. season, time of the day?) Do you think the person sending the texts is in the scene? Why? Who do you agree with more? Girl B or Girl C? Why? Who\u2019s the guy passing by and why? What do you think people\u2019s emotions are? What\u2019s your current hypothesis?",
+                "Sarah rushed into the restroom before class started. While sitting on the toilet, Sarah received another text. She then noticed someone was standing outside through the stall gap.  Where was this photo taken and what you see in this setting? What clothing items do you notice? (e.g. shoes)  What characteristics would describe a person wearing this? What\u2019s the relationship between the sender and Sarah/ Girl B? What\u2019s your current hypothesis?",
+                "Sarah freaked out and was too afraid to get out. Then she heard a shocking voice saying \u201cWhat are you doing here hun?\u201d by a cleaning staff walked in. The stalker awkwardly fled and Sarah was then able to get out. When she walked out of the restroom, she saw some people, including Girl B, chatting together. Sarah felt that the stalker maybe was among them.  Why do you think the cleaning staff said that? Where and when was this picture taken? What kind of clothing is each person wearing? Do you think there\u2019s more than one stalker? Why? Who is likely to be the stalker?"
+            ],
+            "title": "Who's stalking the girl?"
+        },
+        "scenario3": {
+            "author": "chia",
+            "description": "When Mr. Potter got back to work, he saw people standing by his desk, with his secretary sobbing and looking terrified. Help the detective find the culprit!",
+            "images": [
+                "https://firebasestorage.googleapis.com/v0/b/vip-ipcrowd.appspot.com/o/images%2Fscenario2%2F02_01.JPG?alt=media&token=b6025a74-9ab0-4732-b34f-a0b63f86b259",
+                "https://firebasestorage.googleapis.com/v0/b/vip-ipcrowd.appspot.com/o/images%2Fscenario2%2F02-02.jpg?alt=media&token=30b34a3d-55e6-4274-902a-afd0d1dff132",
+                "https://firebasestorage.googleapis.com/v0/b/vip-ipcrowd.appspot.com/o/images%2Fscenario2%2F02-03.jpg?alt=media&token=5cd58e69-5c86-48a9-b622-80ef640da68d",
+                "https://firebasestorage.googleapis.com/v0/b/vip-ipcrowd.appspot.com/o/images%2Fscenario2%2F02-04.jpg?alt=media&token=ca513d88-d435-4808-81f4-4487a9e4e28b",
+                "https://firebasestorage.googleapis.com/v0/b/vip-ipcrowd.appspot.com/o/images%2Fscenario2%2F02-05.JPG?alt=media&token=89238fcb-940c-4980-866e-3864708f7d87"
+            ],
+            "prompts": [
+                "Mr. Potter left the office early but returned later because he had left his phone. When he got back to office, he saw his secretary sobbing and looking terrified. \u201cMr. Potter! Someone broke into your computer. I went to the breakroom for only a few minutes and when I returned I realized the important file on the desktop was deleted! Shall we call the police?\u201d When and where was this photo taken?  Who do you see in this scene and what are their characteristics? What do you think happened here? What were everyone\u2019s emotional reactions to the event? What\u2019s your current hypothesis about who stole the file?",
+                "Mr. Potter called the police. The secretary explained the whole thing and the police took a look at the office. It was a small space, and there were no windows, just a door connected to two other person\u2019s office - Mr. Poole and Ms. Walker.  Why do you think the police questioned the secretary? What do you think the secretary will explain? Do you think the police believes her? What are these paper scraps on the floor? Are they significant clues\uff1f What\u2019s your current hypothesis?",
+                "The police decided to ask Ms. Walker a few questions. \u201cWhat were you doing at that time?\u201d \u201cI was pretty busy this evening officer. We got an important meeting next week. I was just working on my laptop trying to get the data ready, also was scanning some documents. I think I heard some sound in Mr. Potter\u2019s office but I\u2019m not entirely sure.\u201d Ms. Walker said.   Where is she and what is she doing? What do you notice she is carrying or wearing? How would you describe her emotion? What kind of clues does she portray about her testimony? What\u2019s your current hypothesis?",
+                "The police then questioned Mr. Poole. \u201cUh... Hmm well, I was leading an office tour I think? There\u2019s an important group of company partners visiting us. Oh, and what happened to him doesn\u2019t matter anyway because next week I\u2019ll be the one that gets that promotion.\u201d said Mr. Poole.   What do you notice he is carrying or wearing? How would you describe his emotion? What kind of clues does he portray about his honesty and testimony? What do you think the relationships are between people in this picture? What\u2019s your current hypothesis?",
+                "The police turned to the secretary again and pulled up a photo of her in Mr. Potter\u2019s office taken by a security camera earlier that day. \u201cWhat were you doing?\u201d \u201cI don\u2019t remember exactly...\u201d she said, \u201cbut I do all kinds of errands with Mr. Potter\u2019s paperwork, so this afternoon I was probably dropping off some forms for his to sign tomorrow.\u201d What do you notice she is carrying or wearing? What is she doing? Who might she be talking to? How would you describe her emotion? What kind of clues does she portray about her honesty and testimony? Who do you think stole the files? Mr. Poole, Ms. Walker, or the secretary? Why?"
+            ],
+            "title": "Who stole the secret file?"
+        }
+    }
+}
