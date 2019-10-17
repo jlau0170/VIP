@@ -7,6 +7,7 @@ import pyrebase
 import requests
 import sys
 import time
+import os
 
 logging.basicConfig(filename='flask-server.log', level=logging.DEBUG)
 
@@ -31,6 +32,9 @@ DEFAULT_PTS = 0
 app = Flask(__name__)
 app.logger.addHandler(logging.StreamHandler(sys.stdout))
 app.logger.setLevel(logging.INFO)
+
+
+app.config['UPLOAD_FOLDER'] = 'static/Uploads'
 
 @app.route('/')
 @app.route('/login', methods=['POST'])
@@ -136,7 +140,7 @@ def show_scenario():
         _store_scenario_data(hypothesis, cur_comments, scenario_name, cur_iter)
 
     html_page = "scenario.html"
-    if scenario_name == "Upload Image yo title":
+    if scenario_name == "Contribute to the GT Disability Services":
         html_page = "upload_image_scenario.html"
 
     isGTq = False
@@ -144,6 +148,8 @@ def show_scenario():
         isGTq = True
 
     if cur_iter >= num_imgs:
+        if scenario_name == "Contribute to the GT Disability Services":
+            upload_post_image(request.form.get('filePath', None))
         return go_home()
     start_time = time.time()
     img_urls, desc_urls, prompt_urls = _build_url_dict()
@@ -154,6 +160,18 @@ def show_scenario():
         scenario_name=scenario_name, user=uid, cur_iter=cur_iter,
         img_url=img_url, bias='temporary bias', prompt=prompt_url,
         comments=cur_comments, total_points=total_points, isGTq=isGTq)
+
+
+
+@app.route('/upload', methods=['GET', 'POST'])
+def upload():
+    if request.method == 'POST':
+        file = request.files['file']
+        print('uploaded filename:', file.filename)
+        f_name = file.filename
+        local_path_image = os.path.join(app.config['UPLOAD_FOLDER'], f_name)
+        file.save(local_path_image)
+    return json.dumps({'filename':f_name})
 
 
 def _get_id_token():
@@ -272,21 +290,32 @@ def _build_url_dict(id_token=None):
     prompt_urls = defaultdict(lambda: defaultdict(str))
     scenarios = db.child('scenario_metadata/scenarios').get(token=id_token)
 
-    print('loading scenarios')
+    scenario_title_list = []
     for scenario in scenarios.each():
-        print("scenario:", scenario.val()['title'], "------------------------------------")
+        # print("scenario:", scenario.val()['title'], "------------------------------------")
+        scenario_title_list.append(scenario.val()['title'])
         urls[scenario.val()['title']] = scenario.val()['images']
         description_urls[scenario.val()['title']] = scenario.val()['description']
         prompt_urls[scenario.val()['title']] = scenario.val()['prompts']
         # print("urls:", urls)
         # print("description_urls", description_urls)
         # print("prompt_urls", prompt_urls)
+    print('loaded scenarios:', scenario_title_list)
     return urls, description_urls, prompt_urls
 
 
 def _get_scenario_urls(token=None):
     img_urls, desc_urls, prompt_urls = _build_url_dict(id_token=token)
     return [(scenario, img_urls[scenario][0], desc_urls[scenario]) for scenario in img_urls]
+
+
+def upload_post_image(image_path):
+    if image_path:
+        print('need to upload ', image_path)
+    else:
+        print('no image selected to upload')
+
+        # needs to be implemented
 
 
 if __name__ == '__main__':

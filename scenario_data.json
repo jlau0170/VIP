@@ -13,14 +13,14 @@
         },
         "scenario1": {
             "author": "abdullah",
-            "description": "Upload image yo description",
+            "description": "Enter this scenario to upload an image of a location on campus that you think requires a physical change <need a better description here lol>",
             "images": [
                 "https://firebasestorage.googleapis.com/v0/b/vip-ipcrowd.appspot.com/o/images%2Fscenario0%2F00-01.jpg?alt=media&token=4e54c5fc-8b11-4253-bde5-e0ebdff9d75e"
             ],
             "prompts": [
-                "upload image yo prompt"
+                "Please enter a title and description of the post. Click the Browse button to upload an image. Need a better prompt here too lol"
             ],
-            "title": "Upload Image yo title"
+            "title": "Contribute to the GT Disability Services"
         },
         "scenario2": {
             "author": "hayley",
