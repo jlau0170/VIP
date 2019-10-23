@@ -4,3 +4,4 @@ flask-server.log
 __pycache__/
 .DS_Store
 venv/
+static/Uploads/

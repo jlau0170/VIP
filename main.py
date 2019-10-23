@@ -21,6 +21,15 @@ firebase = pyrebase.initialize_app(config)
 
 #Website: http://127.0.0.1:5000/
 
+''' To do steps:
+
+1) Redo the show_scenario() method to show one indiviudal page
+2) move all functionality there
+3) create feed page that displays posts
+4) add upvote functionality (optional)
+5) check the login "no . in username" problem
+'''
+
 
 auth = firebase.auth()
 db = firebase.database()
@@ -117,6 +126,7 @@ def handle_signout():
 
 @app.route('/scenario', methods=['POST'])
 def show_scenario():
+    print('RECEIVING DATA:', request.form)
     scenario_name = request.form.get('scenario_name', None)
     cur_iter = int(request.form.get('cur_iter', None)) + 1
     hypothesis = request.form.get('hypothesis', None)
@@ -133,24 +143,30 @@ def show_scenario():
 
 
     if cur_iter != 0:
-        print('calling _store_scenario_data with:', 'hypothesis:',
-         hypothesis, "cur_comments:", cur_comments, "scenario_name:", scenario_name,
-         "cur_iter", cur_iter)
+        print('Storing Scenario Data:', '\n hypothesis:',
+         hypothesis, "\n cur_comments:", cur_comments, "\n scenario_name:", scenario_name,
+         "\n cur_iter:", cur_iter)
 
         _store_scenario_data(hypothesis, cur_comments, scenario_name, cur_iter)
 
-    html_page = "scenario.html"
-    if scenario_name == "Contribute to the GT Disability Services":
+    html_page = "scenario.html" # for all other cases
+    if scenario_name == "Georgia Tech Disability Services":
         html_page = "upload_image_scenario.html"
 
     isGTq = False
-    if scenario_name == "Georgia Tech Disability Services":
+    if scenario_name == "Georgia Tech Disability Services OLD":
         isGTq = True
 
     if cur_iter >= num_imgs:
-        if scenario_name == "Contribute to the GT Disability Services":
-            upload_post_image(request.form.get('filePath', None))
+        print('Rerouting to home page')
+        if scenario_name == "Georgia Tech Disability Services":
+            postTitle = request.form.get('postTitle', None)
+            postDesc = request.form.get('postDescription', None)
+            postImage = request.form.get('filePath', None)
+            handle_postData(postTitle, postDesc, postImage, scenario_name)
+            upload_post_image(request.form.get('filePath', None), scenario_name)
         return go_home()
+
     start_time = time.time()
     img_urls, desc_urls, prompt_urls = _build_url_dict()
     print('_build_url_dict time:  {}'.format(str(time.time() - start_time)))
@@ -252,19 +268,27 @@ def _store_img_hypothesis(hypothesis, scenario_title, cur_iter):
 def _store_scenario_data(hypothesis, comments, scenario_title, cur_iter):
     id_token = _get_id_token()
 
-    hypo_path = 'users/{uid}/scenario_data/{scenario_title}/hypothesis/{img}'.format(
-        uid=_get_uid(),
-        scenario_title=scenario_title,
-        img=str(int(cur_iter)-1))
-    print('hypothesis path for', scenario_title, hypo_path)
-    db.child(hypo_path).set(hypothesis, token=id_token) 
+    if hypothesis:
+        hypo_path = 'users/{uid}/scenario_data/{scenario_title}/hypothesis/{img}'.format(
+            uid=_get_uid(),
+            scenario_title=scenario_title,
+            img=str(int(cur_iter)-1))
+        print('Storing hypothesis at:', hypo_path)
+        # db.child(hypo_path).set(hypothesis, token=id_token) 
+        db.child(hypo_path).set(hypothesis)
+    else:
+        print('No hypothesis submitted for scenario:', scenario_title)
 
+    if comments:
+        comments_path = 'users/{uid}/scenario_data/{scenario_title}/comments/{img}'.format(
+            uid=_get_uid(),
+            scenario_title=scenario_title,
+            img=str(int(cur_iter)-1))
+        db.child(comments_path).set(comments, token=id_token) 
+        print('Stored comments at:', comments_path)
+    else:
+        print('No comments submitted for scenario:', scenario_title)
 
-    comments_path = 'users/{uid}/scenario_data/{scenario_title}/hypothesis/{img}'.format(
-        uid=_get_uid(),
-        scenario_title=scenario_title,
-        img=str(int(cur_iter)-1))
-    db.child(comments_path).set(comments, token=id_token) 
 
     # db.child('users').child(uid).child('scenario_data').child(scenario_title) \
     #         .child('hypothesis').child(img).set(hypothesis, token=id_token)
@@ -309,13 +333,62 @@ def _get_scenario_urls(token=None):
     return [(scenario, img_urls[scenario][0], desc_urls[scenario]) for scenario in img_urls]
 
 
-def upload_post_image(image_path):
+def upload_post_image(image_path, scenario_title):
     if image_path:
-        print('need to upload ', image_path)
+        print('Uploading:', image_path)
+        imageName = image_path.split('/')[-1]
+        storagePath = 'users/{uid}/{scenario_title}/{img}'.format(
+            uid=_get_uid(),
+            scenario_title=scenario_title,
+            img=imageName
+        )
+        storage.child(storagePath).put(image_path)
+        print("Finished storing user data:", image_path, "at:", storagePath)
+
+        storagePath = 'posts/{scenario_title}/{img}'.format(
+            scenario_title=scenario_title,
+            img=imageName
+        )
+        storage.child(storagePath).put(image_path)
+        print("Finished storing post data:", image_path, "at:", storagePath)
+
     else:
         print('no image selected to upload')
-
         # needs to be implemented
+
+
+def handle_postData(postTitle, postDesc, image_path, scenario_title):
+    if postTitle:
+        if not postDesc:
+            postDesc = ''
+
+        postData = {
+            'postTitle': postTitle,
+            'postDesc': postDesc,
+            'upvotes': 0,
+            'downvotes': 0
+        }
+
+        id_token = _get_id_token()
+
+        postKey = db.generate_key() #UNIQUE KEY FOR POST
+
+        postData_path = 'users/{uid}/posts/{scenario_title}/{postKey}'.format(
+            uid=_get_uid(),
+            scenario_title=scenario_title,
+            postKey = postKey
+        )
+        db.child(postData_path).set(postData, token=id_token) 
+
+        print("Uploaded post data:", postData, "\n post data path:", postData_path)
+
+        #TODO: upload image by calling upload_image method and add new paramter that passes in key
+        #that stores storage posts by 'post/{key}imageName.png'
+
+    else:
+        print("Can not upload post without a title")
+
+
 
 
 if __name__ == '__main__':

@@ -9,18 +9,18 @@
             "prompts": [
                 "Georgia Tech would like to make changes to the physical layout\nof the Georgia Tech campus in order to facilitate an easier campus for those\nin need. Georgia Tech needs help in identifying places on campus that\nneed physical changes. Which places on campus require changes? Enter the \nname of a building/walkway/etc in the text box below and annotate the image\nbelow for larger areas."
             ],
-            "title": "Georgia Tech Disability Services"
+            "title": "Georgia Tech Disability Services OLD"
         },
         "scenario1": {
             "author": "abdullah",
-            "description": "Enter this scenario to upload an image of a location on campus that you think requires a physical change <need a better description here lol>",
+            "description": "Georgia Tech would like to make changes to the physical layout\nof the campus in order to facilitate an easier campus for those\nin need. Georgia Tech needs help in identifying places on campus that\nneed physical changes. Help them identify and pinpoint specific places that\ncould benefit from these changes.",
             "images": [
                 "https://firebasestorage.googleapis.com/v0/b/vip-ipcrowd.appspot.com/o/images%2Fscenario0%2F00-01.jpg?alt=media&token=4e54c5fc-8b11-4253-bde5-e0ebdff9d75e"
             ],
             "prompts": [
-                "Please enter a title and description of the post. Click the Browse button to upload an image. Need a better prompt here too lol"
+                "Georgia Tech would like to make changes to the physical layout\nof the Georgia Tech campus in order to facilitate an easier campus for those\nin need. Georgia Tech needs help in identifying places on campus that\nneed physical changes. Which places on campus require changes? Enter the \nname of a building/walkway/etc in the text box below and annotate the image\nbelow for larger areas."
             ],
-            "title": "Contribute to the GT Disability Services"
+            "title": "Georgia Tech Disability Services"
         },
         "scenario2": {
             "author": "hayley",

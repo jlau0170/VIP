@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>IP Crowd - Upload Image</title>
+		<title>IP Crowd - Disability Services Scenario</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="{{ url_for('static', filename='assets/css/main.css') }}">
@@ -16,11 +16,6 @@
 	  <link href="//getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
 
 
-		<!-- for image uploading -->
-
-
-
-<!--
 		<script type="javascript">
 			function testing()
 			{
@@ -38,7 +33,6 @@
 			   //return false;
 			}
 		</script>
--->
 
 		<script>
 			$(function(){
@@ -107,18 +101,38 @@
 	      <form id="myform" name="myform" action="{{ url_for('show_scenario') }}" method="post">
 					<h2>{{ scenario_name }}</h2>
 					<br>
-					<!-- <p><b>{{ prompt }}</b></p> -->
+					<p>{{ prompt }}</p>
+
+					<input id="hypothesis" type="text" name="hypothesis" placeholder="Enter Locations" />
+					<br><br><br>
+					<p>Please annotate the image regarding other locations on campus!</p>
+
+			        <img src="{{ img_url }}" class=annotatable width="800" style="border-width:3px;border-style:solid;border-color:#000000;"></img>
+
+					<input type="hidden" name="cur_iter" value="{{ cur_iter }}" />
+					<input type="hidden" name="scenario_name" value="{{ scenario_name }}" />
+					<input type="hidden" id="username" name="username" value="{{ user }}" />
+
+					<br><br>
+					<p>Provide some suggestions as to how Georgia Tech can fix the areas you highlighted above</p>
+
+					<textarea id="comments" name="comments" rows="5">{{ comments }}</textarea>
+					<br><br>
+
+
+					<h3> Do you have an image of a location on campus that requires changes? </h3>
+
+					<p> Please attach an image below as well as provide a title and description of the image. Check out the feed on the home page aftewards to see other user's images as well!</p>
 
 					<div class="form-group">
                 		<label for="txtTitle">Title</label>
-                		<input id="hypothesis" name="hypothesis" type="text" placeholder="Title of Post" class="form-control input-md">
+                		<input id="postTitle" name="postTitle" type="text" placeholder="Title of Post" class="form-control input-md">
           			</div>
 
           			<div class="form-group">
                 		<label for="txtPost">Description</label>
-                		<textarea class="form-control" id="comments" name="Description" placeholder="Description of Post" cols="100"></textarea>
+                		<textarea class="form-control" id="postDescription" name="postDescription" placeholder="Description of Post" cols="100"></textarea>
             		</div>
-
 
             		<div class="form-group">
 		                <label for="txtPost">Photos</label>
@@ -137,11 +151,6 @@
 		                </div>
 		 
 		            </div>
-
-
-					<input type="hidden" name="cur_iter" value="{{ cur_iter }}" />
-					<input type="hidden" name="scenario_name" value="{{ scenario_name }}" />
-					<input type="hidden" id="username" name="username" value="{{ user }}" />
 
 					<br><br><br><br>
 					<button id="next_pic" type="button" value="Next" onclick="store_annotations();"><i class="fa fa-arrow-circle-right fa-4x"></i></button>
