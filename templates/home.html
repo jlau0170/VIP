@@ -99,11 +99,26 @@
 							<!-- Feed -->
 							<article id="feed" class="panel">
 								<header>
-									<h2 style="text-align:center;">Rankings</h2>
+									<h2 style="text-align:center;">Feed</h2>
 									<hr>
 								</header>
 								<div>
-									yeeeeet
+									<form action="{{ url_for('show_feed') }}" method="post">
+										{% for scenario in scenario_urls %}
+										<h4>{{ scenario[0] }}</h4>
+                                        <table>
+                                            <tr>
+                                            	<!--
+                                                <td><img class="Scenario-Image" src="{{ scenario[1] }}"/></td>
+                                                -->
+                                                <td><p class="Description" >{{ scenario[2] }}</p></td>
+                                            </tr>
+                                        </table>
+										<button class="Play" type="submit" name="scenario_name" value="{{ scenario[0] }}" onclick="">View Feed</button>
+										<hr>
+										{% endfor %}
+										<input type="hidden" name="cur_iter" value="-1" />
+									</form>
 								</div>
 							</article>
 

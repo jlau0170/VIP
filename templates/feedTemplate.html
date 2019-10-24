@@ -19,19 +19,27 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
 
 
-    <script src="{{ url_for('static', filename='assets/js/firebase.js') }}"></script>
-    <script>
-      // Initialize Firebase
-      var config = {
-        apiKey: "AIzaSyC6ce12c32OpCI7-u5ueRbfYhsw_fBnkwk",
-        authDomain: "vip-ipcrowd.firebaseapp.com",
-        databaseURL: "https://vip-ipcrowd.firebaseio.com",
-        projectId: "vip-ipcrowd",
-        storageBucket: "vip-ipcrowd.appspot.com",
-        messagingSenderId: "80658497046"
-      };
-      firebase.initializeApp(config);
-    </script>
+
+
+    <script src="{{ url_for('static', filename='assets/js/jquery.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='assets/js/browser.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='assets/js/breakpoints.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='assets/js/util.js') }}"></script>
+  <script src="{{ url_for('static', filename='assets/js/main.js') }}"></script>
+  <script src="{{ url_for('static', filename='assets/js/firebase.js') }}"></script>
+
+      <script>
+        // Initialize Firebase
+        var config = {
+          apiKey: "AIzaSyBEEdVVD1DaQ_bOxhQzXSPdRWrS-goqChc",
+          authDomain: "ipcrowd-a8aea.firebaseapp.com",
+          databaseURL: "https://ipcrowd-a8aea.firebaseio.com",
+          projectId: "ipcrowd-a8aea",
+          storageBucket: "ipcrowd-a8aea.appspot.com",
+          messagingSenderId: "734706257829"
+        };
+        firebase.initializeApp(config);
+      </script>
 
 
     <style>
@@ -62,34 +70,24 @@
   <section id="gallery">
     <div class="container">
       <div class="row">
+
+
+      {% for post in postData %}
       <div class="col-lg-4 mb-4">
       <div class="card">
-        <img src="https://images.unsplash.com/photo-1477862096227-3a1bb3b08330?ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=60" alt="" class="card-img-top">
+        <img src="{{ post[0] }}" alt="" class="card-img-top">
         <div class="card-body">
-          <h5 class="card-title">Sunset</h5>
-          <p class="card-text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut eum similique repellat a laborum, rerum voluptates ipsam eos quo tempore iusto dolore modi dolorum in pariatur. Incidunt repellendus praesentium quae!</p>
-         <a href="" class="btn btn-outline-success btn-sm">Read More</a>
-          <a href="" class="btn btn-outline-danger btn-sm"><i class="far fa-heart"></i></a>
+          <h5 class="card-title">{{ post[1] }}</h5>
+          <p class="card-text">{{ post[2] }}</p>
+          <a href="" class="btn btn-outline-success btn-sm" >Read More</a>
+          <a href="" class="btn btn-outline-danger btn-sm" > <i class="far fa-heart"></i></a>
         </div>
        </div>
       </div>
-
-
-    <div class="col-lg-4 mb-4">
-    <div class="card">
-        <img src="https://images.unsplash.com/photo-1516214104703-d870798883c5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=60" alt="" class="card-img-top">
-        <div class="card-body">
-          <h5 class="card-title">Sunset</h5>
-          <p class="card-text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut eum similique repellat a laborum, rerum voluptates ipsam eos quo tempore iusto dolore modi dolorum in pariatur. Incidunt repellendus praesentium quae!</p>
-         <a href="" class="btn btn-outline-success btn-sm">Read More</a>
-          <a href="" class="btn btn-outline-danger btn-sm"><i class="far fa-heart"></i></a>
-        </div>
-        </div>
-      </div>
-
-
+      {% endfor %}
     </div>
   </div>
   </section>
+
   </body>
 </html>

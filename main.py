@@ -164,7 +164,7 @@ def show_scenario():
             postDesc = request.form.get('postDescription', None)
             postImage = request.form.get('filePath', None)
             handle_postData(postTitle, postDesc, postImage, scenario_name)
-            upload_post_image(request.form.get('filePath', None), scenario_name)
+            # upload_post_image(request.form.get('filePath', None), scenario_name)
         return go_home()
 
     start_time = time.time()
@@ -188,6 +188,26 @@ def upload():
         local_path_image = os.path.join(app.config['UPLOAD_FOLDER'], f_name)
         file.save(local_path_image)
     return json.dumps({'filename':f_name})
+
+
+@app.route('/feed', methods=['POST'])
+def show_feed():
+
+    postData = [] #[[ImgLink, postTitle, postDescription], [post #2], [post #3]]
+
+    posts = db.child('posts').child('Georgia Tech Disability Services').get().val()
+
+    for key in posts.keys():
+        postEntry = []
+        postEntry.append(posts[key]['imgURL'])
+        postEntry.append(posts[key]['postTitle'])
+        postEntry.append(posts[key]['postDesc'])
+        postData.append(postEntry)
+
+    print('Showing Data:', postData)
+
+    return render_template('feedTemplate.html', postData=postData)
+
 
 
 def _get_id_token():
@@ -333,7 +353,9 @@ def _get_scenario_urls(token=None):
     return [(scenario, img_urls[scenario][0], desc_urls[scenario]) for scenario in img_urls]
 
 
-def upload_post_image(image_path, scenario_title):
+def upload_post_image(image_path, scenario_title, postKey):
+    id_token = _get_id_token()
+
     if image_path:
         print('Uploading:', image_path)
         imageName = image_path.split('/')[-1]
@@ -345,12 +367,20 @@ def upload_post_image(image_path, scenario_title):
         storage.child(storagePath).put(image_path)
         print("Finished storing user data:", image_path, "at:", storagePath)
 
-        storagePath = 'posts/{scenario_title}/{img}'.format(
+        storagePath = 'posts/{scenario_title}/{postKey}/{img}'.format(
             scenario_title=scenario_title,
+            postKey=postKey,
             img=imageName
         )
         storage.child(storagePath).put(image_path)
         print("Finished storing post data:", image_path, "at:", storagePath)
+
+        storageURL = storage.child(storagePath).get_url(id_token)
+
+        db.child('posts/{scenario_title}/{postKey}'.format(
+            scenario_title=scenario_title,
+            postKey = postKey
+        )).child('imgURL').set(storageURL, token=id_token)
 
     else:
         print('no image selected to upload')
@@ -363,6 +393,7 @@ def handle_postData(postTitle, postDesc, image_path, scenario_title):
             postDesc = ''
 
         postData = {
+            'user': _get_uid(),
             'postTitle': postTitle,
             'postDesc': postDesc,
             'upvotes': 0,
@@ -373,17 +404,25 @@ def handle_postData(postTitle, postDesc, image_path, scenario_title):
 
         postKey = db.generate_key() #UNIQUE KEY FOR POST
 
-        postData_path = 'users/{uid}/posts/{scenario_title}/{postKey}'.format(
+        User_postData_path = 'users/{uid}/posts/{scenario_title}/{postKey}'.format(
             uid=_get_uid(),
             scenario_title=scenario_title,
             postKey = postKey
         )
-        db.child(postData_path).set(postData, token=id_token) 
+        db.child(User_postData_path).set(postData, token=id_token) 
 
-        print("Uploaded post data:", postData, "\n post data path:", postData_path)
+        print("Uploaded post data:", postData, "\n post data path:", User_postData_path)
+
+        Posts_postData_path = 'posts/{scenario_title}/{postKey}'.format(
+            scenario_title=scenario_title,
+            postKey = postKey
+        )
+        db.child(Posts_postData_path).set(postData, token=id_token) 
 
         #TODO: upload image by calling upload_image method and add new paramter that passes in key
         #that stores storage posts by 'post/{key}imageName.png'
+
+        upload_post_image(image_path, scenario_title, postKey)
 
     else:
         print("Can not upload post without a title")
