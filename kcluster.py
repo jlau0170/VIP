@@ -9,7 +9,6 @@ with open('results.txt') as inp:
         documents.append(line)
 
 
-
 vectorizer = TfidfVectorizer(stop_words='english')
 X = vectorizer.fit_transform(documents)
 
